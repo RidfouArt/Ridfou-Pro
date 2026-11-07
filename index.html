@@ -1,21 +1,381 @@
-<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ridfou Art Accroche Pro</title><style>*{box-sizing:border-box}body{margin:0;background:#f1f5f9;color:#172033;font:15px system-ui}header{background:#172033;color:white;padding:18px}h1{font-size:21px;margin:0}main{max-width:1100px;margin:auto;padding:12px;display:grid;gap:12px}.card{background:white;border-radius:14px;padding:15px;margin-bottom:12px}h2{font-size:16px;margin:0 0 12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}label{display:block;font-size:12px;font-weight:650;margin-bottom:4px}input,select{width:100%;padding:10px;border:1px solid #b8c4d2;border-radius:8px;font:inherit;background:white}input[type=checkbox]{width:auto}button{padding:10px;border:1px solid #94a3b8;border-radius:8px;background:white;font-weight:650}.active{background:#2563eb;color:white;border-color:#2563eb}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.muted{font-size:12px;color:#64748b}.plan{background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0}svg{display:block;width:100%}.result{padding:10px;background:#f1f5f9;border-radius:8px;margin-top:8px;font-size:13px}.warning{color:#b45309;font-size:13px}@media(min-width:850px){main{grid-template-columns:350px 1fr}.output{position:sticky;top:10px;align-self:start}}</style><header><h1>Ridfou Art Accroche Pro</h1><div style="font-size:12px;color:#cbd5e1">Plan coté et calcul des perçages</div></header><main><div><section class="card"><h2>1. Mur</h2><div class="grid"><div><label>Largeur (cm)</label><input id="mw" type="number" placeholder="À renseigner"></div><div><label>Hauteur (cm)</label><input id="mh" type="number" placeholder="À renseigner"></div></div></section><section class="card"><h2>2. Œuvres</h2><div class="row" style="margin-bottom:12px"><button id="one" class="active">1 œuvre</button><button id="many">Créer une série</button></div><div id="series" hidden><div class="grid"><div><label>Colonnes</label><input id="cols" type="number" value="2" min="1" max="12"></div><div><label>Rangées</label><input id="rows" type="number" value="3" min="1" max="12"></div><div><label>Écart horizontal (cm)</label><input id="gx" type="number" value="15"></div><div><label>Écart vertical (cm)</label><input id="gy" type="number" value="10"></div></div><p class="muted">Cette version utilise des œuvres de mêmes dimensions dans une série.</p></div><div class="grid"><div><label>Largeur œuvre (cm)</label><input id="aw" type="number" placeholder="À renseigner"></div><div><label>Hauteur œuvre (cm)</label><input id="ah" type="number" placeholder="À renseigner"></div></div></section><section class="card"><h2>3. Hauteur choisie</h2><label>Positionner par</label><select id="ref"><option value="center">Centre de l’œuvre / rangée</option><option value="bottom">Bas de l’œuvre / série</option><option value="top">Haut de l’œuvre / série</option><option value="gap">Milieu de l’écart entre 2 rangées</option></select><div id="rowWrap" style="margin-top:10px" hidden><label>Rangée de référence (1 = en haut)</label><select id="anchor"></select></div><div id="gapWrap" style="margin-top:10px" hidden><label>Entre quelles rangées ?</label><select id="gapRow"></select></div><div style="margin-top:10px"><label>Hauteur depuis le sol (cm)</label><input id="level" type="number" placeholder="À renseigner"></div></section><section class="card"><h2>4. Points d’accroche</h2><div class="grid"><div><label>Points par œuvre</label><select id="points"><option>1</option><option selected>2</option><option>4</option></select></div><div><label>Depuis le haut (cm)</label><input id="top" type="number" placeholder="À renseigner"></div><div id="leftWrap"><label>Depuis la gauche (cm)</label><input id="left" type="number" placeholder="À renseigner"></div><div id="rightWrap"><label>Depuis la droite (cm)</label><input id="right" type="number" placeholder="À renseigner"></div><div id="bottomWrap" hidden><label>Points bas depuis le bas (cm)</label><input id="bottom" type="number" placeholder="À renseigner"></div></div></section><section class="card"><h2>5. Position horizontale</h2><div class="grid"><div><label>Décalage du centre (cm)</label><input id="shift" type="number" value="0"></div><div><label>Mesurer depuis</label><select id="direction"><option value="left">La gauche</option><option value="right">La droite</option></select></div></div><div class="row" style="margin-top:12px"><button id="recenter">Recentrer</button><button id="reset">Tout effacer</button></div></section></div><section class="panel" style="margin-top:13px"><h2>6. Photo de ton croquis</h2>
-<p class="muted">Prends en photo ton croquis sur papier quadrillé ou importe une image. Elle reste sur ton appareil et sert de référence pour reproduire l'accrochage.</p>
-<label for="sketchFile">Choisir ou prendre une photo</label>
-<input id="sketchFile" type="file" accept="image/*" style="font-size:13px">
-<div id="sketchTools" hidden style="margin-top:12px">
-<div class="fields"><div><label for="sketchOpacity">Transparence de la photo</label><input id="sketchOpacity" type="range" min="10" max="100" value="85"></div>
-<div><label for="sketchRotation">Rotation</label><select id="sketchRotation"><option value="0">0°</option><option value="90">90°</option><option value="180">180°</option><option value="270">270°</option></select></div></div>
-<div class="toggle" style="margin:12px 0"><input id="sketchVisible" type="checkbox" checked><label for="sketchVisible">Afficher la photo</label></div>
-<div class="plan" style="text-align:center;padding:10px;min-height:80px"><img id="sketchPreview" alt="Photo du croquis importé" style="display:block;max-width:100%;max-height:350px;object-fit:contain;margin:auto;transform-origin:center"></div>
-<div class="actions" style="margin-top:10px"><button id="sketchRemove">Supprimer la photo</button></div>
-</div><p class="muted">La photo n'est pas analysée automatiquement. Utilise-la pour saisir tes dimensions et comparer ton plan coté.</p>
-</section></div><div class="output"><section class="card"><h2>Plan d’accrochage</h2><div class="row" style="justify-content:space-between;margin-bottom:12px"><label style="font-size:14px"><input id="dims" type="checkbox"> Afficher les cotes</label><button id="download">Enregistrer le plan</button></div><div class="plan"><svg id="svg" viewBox="0 0 800 580"></svg></div><p id="warning" class="warning"></p><p class="muted">Orange : points de perçage. Cotes horizontales de trou à trou, hauteurs depuis le sol. Mesures en cm.</p><div id="results"></div><details><summary>Voir le détail des calculs</summary><p id="calc" class="muted"></p></details></section></div></main><script>
-const $=id=>document.getElementById(id),num=id=>$(id).value===''?NaN:Number($(id).value),fmt=x=>Number.isFinite(x)?Number(x.toFixed(1)).toLocaleString('fr-FR'):'—';let series=false;const ns='http://www.w3.org/2000/svg';function draw(tag,a={},txt=''){let e=document.createElementNS(ns,tag);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,v));if(txt)e.textContent=txt;$('svg').append(e)}function update(){let nr=series?Math.max(1,Math.min(12,Math.round(num('rows')||1))):1,old=$('anchor').value||String(Math.ceil(nr/2)),oldGap=$('gapRow').value||'1';$('anchor').innerHTML=Array.from({length:nr},(_,i)=>`<option value="${i+1}">Rangée ${i+1}</option>`).join('');$('anchor').value=Number(old)<=nr?old:String(Math.ceil(nr/2));$('gapRow').innerHTML=Array.from({length:nr-1},(_,i)=>`<option value="${i+1}">Rangées ${i+1} et ${i+2}</option>`).join('');if(Number(oldGap)<nr)$('gapRow').value=oldGap;let ref=$('ref').value;if(ref==='gap'&&nr<2){$('ref').value='center';ref='center'}$('rowWrap').hidden=!series||ref!=='center';$('gapWrap').hidden=!series||ref!=='gap';$('leftWrap').hidden=$('rightWrap').hidden=num('points')===1;$('bottomWrap').hidden=num('points')!==4;
-let W=num('mw'),H=num('mh'),w=num('aw'),h=num('ah'),level=num('level'),cols=series?Math.max(1,Math.min(12,Math.round(num('cols')||1))):1,rows=nr,gx=series?num('gx'):0,gy=series?num('gy'):0,top=num('top'),left=num('left'),right=num('right'),bottom=num('bottom'),points=num('points'),show=$('dims').checked;
-const wall=W>0&&H>0,art=w>0&&h>0,layout=wall&&art&&Number.isFinite(level)&&gx>=0&&gy>=0;let totalW=cols*w+(cols-1)*gx,totalH=rows*h+(rows-1)*gy,x0=(W-totalW)/2+(num('shift')||0),first=NaN,anchor=Number($('anchor').value)||1,gapRow=Number($('gapRow').value)||1;if(layout){if(ref==='center')first=level-h/2+(anchor-1)*(h+gy);else if(ref==='bottom')first=level+(rows-1)*(h+gy);else if(ref==='top')first=level-h;else first=level+gy/2+(gapRow-1)*(h+gy)}
-let ok=art&&top>=0&&top<=h&&(points===1||(left>=0&&right>=0&&left+right<=w))&&(points!==4||(bottom>=0&&bottom<=h));$('warning').textContent=layout&&(x0<0||x0+totalW>W||first-(rows-1)*(h+gy)<0||first+h>H)?'Attention : la composition dépasse le mur.':art&&!ok?'Vérifie les distances des attaches.':'';
-$('svg').replaceChildren();let dw=wall?W:400,dh=wall?H:280,sc=Math.min(600/dw,390/dh),X=x=>90+x*sc,Y=y=>455-y*sc;draw('rect',{width:800,height:580,fill:'#f8fafc'});draw('rect',{x:X(0),y:Y(dh),width:dw*sc,height:dh*sc,fill:'white',stroke:'#64748b','stroke-width':2});draw('line',{x1:75,y1:455,x2:710,y2:455,stroke:'#334155','stroke-width':2});draw('text',{x:85,y:480,fill:'#334155','font-size':15},'SOL');if(wall&&show)draw('text',{x:X(W/2),y:Y(H)-12,fill:'#334155','font-size':14,'text-anchor':'middle'},`Mur ${fmt(W)} × ${fmt(H)} cm`);if(!wall||!art){draw('text',{x:400,y:270,'text-anchor':'middle',fill:'#64748b','font-size':20},'Renseigne le mur et l’œuvre');draw('text',{x:400,y:297,'text-anchor':'middle',fill:'#64748b','font-size':14},'Le plan apparaîtra ici')}
-let works=[];if(layout){for(let r=0;r<rows;r++)for(let c=0;c<cols;c++){let x=x0+c*(w+gx),y=first-r*(h+gy),ps=[];if(ok){let xs=points===1?[w/2]:[left,w-right];xs.forEach(xx=>ps.push({x:x+xx,y:y+h-top}));if(points===4)xs.forEach(xx=>ps.push({x:x+xx,y:y+bottom}))}works.push({r,c,x,y,ps});draw('rect',{x:X(x),y:Y(y+h),width:w*sc,height:h*sc,fill:r===anchor-1?'#dbeafe':'#edf2f7',stroke:'#2563eb','stroke-width':1.7});draw('text',{x:X(x+w/2),y:Y(y+h/2)+5,'text-anchor':'middle',fill:'#334155','font-size':14},String(r*cols+c+1));ps.forEach(p=>draw('circle',{cx:X(p.x),cy:Y(p.y),r:4,fill:'#d97706'}))}
-if(show){let groups=new Map;for(let a of works)for(let p of a.ps){let key=a.r+':'+p.y.toFixed(4);if(!groups.has(key))groups.set(key,{r:a.r,y:p.y,ps:[]});groups.get(key).ps.push(p)}for(let group of groups.values()){let sorted=group.ps.sort((a,b)=>$('direction').value==='left'?a.x-b.x:b.x-a.x),prev=$('direction').value==='left'?0:W,yy=Y(group.y)-22;for(let p of sorted){let x1=X(prev),x2=X(p.x);draw('line',{x1,y1:yy,x2,y2:yy,stroke:'#d97706','stroke-width':1.4});for(let x of [x1,x2])draw('line',{x1:x,y1:yy-4,x2:x,y2:yy+4,stroke:'#d97706'});if(Math.abs(x2-x1)>23)draw('text',{x:(x1+x2)/2,y:yy-6,'text-anchor':'middle',fill:'#a16207','font-size':12},fmt(Math.abs(p.x-prev)));prev=p.x}draw('line',{x1:X(sorted[sorted.length-1].x),y1:Y(group.y),x2:X(W)+6,y2:Y(group.y),stroke:'#d97706','stroke-dasharray':'4 4'});draw('text',{x:X(W)+10,y:Y(group.y)+5,fill:'#a16207','font-size':13},fmt(group.y)+' cm')}if(ref==='center'||ref==='gap')draw('line',{x1:X(0),y1:Y(level),x2:X(W),y2:Y(level),stroke:'#0f766e','stroke-width':1.5,'stroke-dasharray':'7 5'})}}
-let results=$('results');results.replaceChildren();if(layout&&ok)for(let r=0;r<rows;r++){let ps=works.filter(a=>a.r===r).flatMap(a=>a.ps),ys=[...new Set(ps.map(p=>p.y.toFixed(4)))].map(Number).sort((a,b)=>b-a),d=document.createElement('div');d.className='result';let html=`<b>Rangée ${r+1}</b>`;for(let y of ys){let sorted=ps.filter(p=>Math.abs(p.y-y)<.0001).sort((a,b)=>$('direction').value==='left'?a.x-b.x:b.x-a.x),prev=$('direction').value==='left'?0:W;let distances=sorted.map(p=>{let v=Math.abs(p.x-prev);prev=p.x;return fmt(v)});html+=`<div>Perçage à <b>${fmt(y)} cm du sol</b></div><div>Mur → trou → trou : ${distances.join(' → ')} cm</div>`}d.innerHTML=html;results.append(d)}$('calc').textContent=layout?`Largeur totale = ${cols} × ${fmt(w)} + ${cols-1} × ${fmt(gx)} = ${fmt(totalW)} cm. Départ = (${fmt(W)} − ${fmt(totalW)}) ÷ 2 + décalage = ${fmt(x0)} cm. Pour chaque point haut : hauteur du trou = bas de l’œuvre + hauteur de l’œuvre − distance de l’attache depuis le haut.`:'Renseigne les dimensions pour voir les calculs.'}
-for(let e of document.querySelectorAll('input,select'))e.addEventListener('input',update);$('one').onclick=()=>{series=false;$('series').hidden=true;$('one').classList.add('active');$('many').classList.remove('active');update()};$('many').onclick=()=>{series=true;$('series').hidden=false;$('many').classList.add('active');$('one').classList.remove('active');$('anchor').value='2';update()};$('recenter').onclick=()=>{$('shift').value='0';update()};$('reset').onclick=()=>{for(let id of ['mw','mh','aw','ah','level','top','left','right','bottom'])$(id).value='';$('dims').checked=false;$('shift').value='0';$('one').click()};$('download').onclick=()=>{let s=$('svg').cloneNode(true);s.setAttribute('xmlns',ns);let url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(s)],{type:'image/svg+xml'})),a=document.createElement('a');a.href=url;a.download='plan-accrochage-ridfou.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};update();</script></html>
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ridfou Art Accroche Pro</title><style>*{box-sizing:border-box}body{margin:0;background:#f1f5f9;color:#182337;font:15px system-ui,-apple-system,sans-serif}header{background:#172033;color:#fff;padding:18px}h1{font-size:21px;margin:0}main{max-width:1100px;margin:auto;padding:12px;display:grid;gap:12px}.card{background:white;border-radius:14px;padding:15px;margin-bottom:12px}h2{font-size:17px;margin:0 0 12px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}label{display:block;font-size:12px;font-weight:650;margin:0 0 5px}input,select{width:100%;padding:10px;border:1px solid #b8c4d2;border-radius:8px;font:inherit;background:white}input[type=checkbox]{width:auto}input[type=file]{font-size:13px}button{padding:10px 12px;border:1px solid #94a3b8;border-radius:8px;background:white;font-weight:650;cursor:pointer}button.primary{background:#2563eb;color:white;border-color:#2563eb}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.muted{font-size:12px;color:#64748b;line-height:1.5}.plan{background:#f8fafc;border-radius:10px;border:1px solid #e2e8f0}svg{width:100%;display:block}#photo{display:none;max-width:100%;max-height:350px;object-fit:contain;margin:10px auto}.work{border:1px solid #d7e0eb;border-radius:10px;padding:12px;margin:10px 0}.work h3{font-size:14px;margin:0 0 10px}.result{background:#f1f5f9;padding:10px;border-radius:8px;margin:8px 0;font-size:13px}.warn{color:#9a3412;font-size:13px}.hide{display:none!important}@media(min-width:850px){main{grid-template-columns:380px 1fr}.output{position:sticky;top:10px;align-self:start}}.calc-details{font-size:14px;line-height:1.6}.calc-details h3{font-size:15px;margin:16px 0 7px;color:#1e3a8a}.calc-details .calc-step{padding:9px 11px;background:#f8fafc;border-left:3px solid #94a3b8;border-radius:6px;margin:7px 0;overflow-wrap:anywhere}.calc-details .calc-step strong{color:#0f172a}.calc-details .calc-result{background:#eff6ff;border-left-color:#2563eb}.calc-details .calc-note{font-size:12px;color:#64748b}.calc-details .calc-orange{color:#c46a08}.calc-details .calc-green{color:#15803d}.calc-details .calc-blue{color:#2563eb}
+/* Navigation five tabs. Inputs/calculation state remain mounted on tab changes. */
+body{padding-bottom:calc(92px + env(safe-area-inset-bottom, 0px));}
+main{display:block;max-width:850px;padding:14px 14px 28px;}
+.output{position:static!important;top:auto!important;}
+.app-screen{display:none;}
+body[data-view="mur"] [data-screens~="mur"],
+body[data-view="oeuvres"] [data-screens~="oeuvres"],
+body[data-view="attaches"] [data-screens~="attaches"],
+body[data-view="percage"] [data-screens~="percage"],
+body[data-view="calculs"] [data-screens~="calculs"]{display:block;}
+body[data-view="oeuvres"] .work-attach,
+body[data-view="attaches"] .work-dim{display:none!important;}
+body[data-view="attaches"] #secOeuvres > .row,
+body[data-view="attaches"] #secOeuvres > .muted,
+body[data-view="attaches"] #seriesOptions,
+body[data-view="attaches"] #secOeuvres .remove{display:none!important;}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(255,255,255,.97);border-top:1px solid #d7e1eb;box-shadow:0 -7px 25px rgba(15,34,55,.07);display:flex;align-items:stretch;justify-content:space-around;padding:6px max(5px, env(safe-area-inset-right, 0px)) calc(5px + env(safe-area-inset-bottom, 0px)) max(5px, env(safe-area-inset-left, 0px));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.bottom-tab{flex:1;max-width:160px;min-width:0;display:flex;align-items:center;flex-direction:column;gap:3px;border:0;background:transparent;color:#6c7c8e;padding:7px 2px 6px;font-size:11px;font-weight:650;border-radius:12px;cursor:pointer}
+.bottom-tab svg{width:23px;height:23px;stroke-width:1.9;flex-shrink:0}
+.bottom-tab span{white-space:nowrap}
+.bottom-tab[aria-current="page"]{color:#1765be;background:#eef6ff;font-weight:800}
+.bottom-tab:focus-visible{outline:3px solid #2563eb;outline-offset:-3px}
+.drill-title{font-size:19px;color:#1d4e90;margin:25px 0 12px}
+.drill-help,.drill-missing{background:#fff7ed;border-left:4px solid #ed8936;border-radius:10px;padding:13px;color:#7c4215;line-height:1.5;margin:11px 0}
+.drill-card{background:#eaf5f9;border:2px solid #a8cfdb;border-radius:19px;padding:18px 20px;margin:14px 0;color:#19323f;box-shadow:0 1px 3px rgba(13,61,83,.04)}
+.drill-card-title{font-size:21px;line-height:1.25;margin:0 0 12px;font-weight:820;color:#19323f}
+.drill-from{font-size:14px;font-weight:650;color:#4c7180;margin:-2px 0 10px}
+.drill-measure{padding:13px 0;border-top:1px solid #d0e6eb}
+.drill-measure:first-of-type{border-top:0}
+.drill-label{color:#526d79;font-size:15px;font-weight:570;letter-spacing:.01em}
+.drill-number{display:flex;align-items:center;gap:11px;color:#086784;margin-top:4px;line-height:1.1;overflow-wrap:anywhere}
+.drill-number strong{font-size:clamp(27px,7vw,38px);font-weight:830;font-variant-numeric:tabular-nums;letter-spacing:-.025em}
+.drill-arrow{font-size:clamp(27px,7vw,38px);font-weight:700}
+.drill-note{color:#4f6b77;font-size:14px;font-weight:550;margin-top:3px}
+.drill-absolute{border-top:1px solid #d0e6eb;margin:10px 0 0;padding-top:13px;color:#4f6b77;font-size:14px;line-height:1.4}
+#secCalculs > details{margin-top:9px}
+#secCalculs > details > summary{cursor:pointer;padding:10px;border-radius:8px;background:#edf6fb;color:#1e4b76;font-weight:700}
+@media (max-width:410px){main{padding:10px 9px 20px}.card{padding:13px}.drill-card{padding:16px 15px}.bottom-tab{font-size:10.5px}}
+@media (min-width:850px){main{display:block;max-width:850px}.output{position:static!important;top:auto!important}}
+
+/* Only the agreed plan and drill refinements. */
+.drill-card-title{font-size:18px;color:#b91c1c}
+.drill-label{font-size:14px}
+.drill-measure[data-tone="green"] .drill-number{color:#15803d}
+.drill-measure[data-tone="orange"] .drill-number{color:#c46a08}
+.drill-measure[data-tone="blue"] .drill-number{color:#2563eb}
+.drill-measure[data-tone="purple"] .drill-number{color:#9333ea}
+.drill-measure[data-tone="red"] .drill-number{color:#dc2626}
+.plan{margin-inline:-15px;border-radius:0;border-left:0;border-right:0;overflow:hidden}
+#drawing{width:100%;height:auto;display:block;}
+#drawing.free-drag{touch-action:none;cursor:grab}
+#drawing.free-drag:active{cursor:grabbing}
+#drawing.free-drag [data-draggable-work]{cursor:grab}
+.plan-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.plan-lock-msg{font-size:12px;color:#52677b;margin:6px 0 0}
+#marginControls{background:#f8fafc;border:1px solid #dbe5ed;padding:10px;border-radius:9px;margin-top:10px}
+.formula-library{margin-top:15px}
+.formula-library .library-tools{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0 12px}
+.formula-library details{border:1px solid #d9e3ec;border-radius:10px;margin:7px 0;background:#f8fafc;overflow:hidden}
+.formula-library summary{cursor:pointer;font-weight:700;padding:12px 13px;color:#254d76}
+.formula-library details[open] summary{border-bottom:1px solid #e2e8f0;background:#eff6ff}
+.formula-library .formula-body{padding:12px 13px;font-size:14px;line-height:1.65}
+.formula-library p{margin:0 0 8px}
+.formula-library .equation{font-size:15px;font-weight:750;color:#124e70;background:white;padding:9px;border-radius:7px;border-left:3px solid #60a5fa;margin:8px 0}
+@media(max-width:410px){.plan{margin-inline:-13px}}
+@media print{.bottom-nav,#secMur,#secCroquis,#secOeuvres,#secHauteur,.plan-tools,#dimOptions,#holeToHole,#results,#warnings,.warn{display:none!important}body[data-view] #secPercage{display:block!important}#secPercage .row{display:none!important}body{background:white!important;padding:0!important}main{padding:0!important}.card{box-shadow:none!important;border:0!important}.plan{margin:0!important;border:0!important;page-break-inside:avoid}}
+
+/* Alignement visuel du plan : centres, hauts ou bas (sans modification des autres outils). */
+.plan-alignment{margin:0 0 14px;padding:12px 12px 10px;background:#f8fafc;border:1px solid #d9e3ec;border-radius:12px}
+.plan-alignment-title{font-size:14px;font-weight:750;color:#243c51;margin-bottom:10px}
+.plan-alignment-options{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.plan-alignment-options button{font:650 13px/1.3 system-ui,-apple-system,sans-serif;padding:11px 4px;min-height:53px;border-radius:9px;border:1px solid #bfccd5;background:#fff;color:#2e475b;white-space:normal}
+.plan-alignment-options button.selected{background:#21343a;border-color:#21343a;color:#fff}
+.plan-alignment-options button:disabled{opacity:.55;cursor:not-allowed}
+.plan-alignment-options button:focus-visible{outline:3px solid #60a5fa;outline-offset:2px}
+.plan-alignment-hint{font-size:12px;line-height:1.5;color:#64748b;margin:9px 0 0}
+@media(max-width:410px){.plan-alignment{padding:11px 9px}.plan-alignment-options button{font-size:12px;padding:9px 2px}}
+@media print{.plan-alignment{display:none!important}}
+
+.plan-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}.legend-pill{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border:1px solid #cbd5e1;border-radius:999px;background:#fff;color:#334155;font-size:14px;font-weight:600;cursor:pointer}.legend-pill.active{background:#eff6ff;border-color:#93c5fd;color:#0f172a}.legend-pill:active{transform:translateY(1px)}.legend-dot{width:16px;height:16px;border-radius:50%;display:inline-block;border:2px solid #fff;box-shadow:0 0 0 1px currentColor inset}.legend-line{width:28px;height:0;border-top:3px solid currentColor;display:inline-block}.plan-legend-footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid #e2e8f0}.plan-legend-footer .muted{font-size:12px;color:#64748b}
+
+/* Plan interactif: présentation de l'aperçu validé, sans changer le moteur de calcul. */
+.plan-preview-sheet{background:#fff;border:1px solid #d4e1ee;border-radius:20px;padding:18px 14px 15px;margin:12px -7px 12px;box-shadow:0 1px 8px #163b5912}
+.plan-preview-header{margin:0 0 9px;padding:0 1px}
+.plan-preview-title{color:#132d53;font-size:clamp(18px,3.7vw,24px);font-weight:850;letter-spacing:.005em}
+.plan-preview-subtitle{color:#58708a;font-size:clamp(12px,2.7vw,15px);margin-top:5px;line-height:1.4}
+.plan-zoom-toolbar{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:8px;margin:9px 1px 8px}
+.plan-zoom-toolbar span{font-size:11px;color:#64748b;margin-right:auto}
+#planZoom{color:#1d5889;border-color:#c2d1df;background:#eff6ff;padding:7px 10px;font-size:12px;border-radius:10px}
+#planZoom[aria-pressed="true"]{background:#1a527e;color:white}
+.plan-preview-sheet .plan{margin:0!important;overflow-x:auto;overflow-y:hidden;border:0;border-radius:4px;background:#fff;scrollbar-width:thin}
+.plan-preview-sheet #drawing{width:100%;min-width:0;height:auto;max-width:none;background:white;display:block}
+.plan-preview-sheet.is-zoomed #drawing{width:max(100%, 950px);min-width:950px}
+.plan-legend-title{font-size:17px;font-weight:800;color:#18345d;margin:15px 2px 9px}
+.plan-preview-sheet .plan-legend{gap:8px;margin-top:4px}
+.plan-preview-sheet .legend-pill{border-radius:12px;padding:9px 11px;background:#f8fafc;border:1px solid #cddbe7;color:#2d4963!important;font-weight:630;font-size:12px;min-height:42px;gap:8px}
+.plan-preview-sheet .legend-pill.active{background:#eef7fc;border-color:#94bed0;box-shadow:inset 0 0 0 1px #d5e9f3}
+.plan-preview-sheet .legend-pill:not(.active){opacity:.54}
+.plan-preview-sheet .legend-dot{background:var(--legend-accent);border:2px solid white;box-shadow:0 0 0 1px #ccd7df;flex-shrink:0}
+.plan-preview-sheet .legend-line{border-color:var(--legend-accent);width:24px;flex-shrink:0}
+.plan-preview-sheet .plan-legend-footer{margin-top:12px;padding:12px 2px 0}
+.plan-preview-sheet .plan-legend-footer .muted{font-size:11px;line-height:1.4}
+.dim-settings{border:1px solid #d8e1e8;border-radius:9px;padding:0;margin:0;background:#f8fafc;max-width:100%}
+.dim-settings>summary{list-style:revert;font-size:12px;color:#1f4a73;font-weight:700;padding:10px;cursor:pointer}
+.dim-settings[open]{flex-basis:100%;order:2}
+.dim-settings #dimOptions{border:0!important;margin-top:0!important;}
+@media(max-width:520px){.plan-preview-sheet{margin-inline:-8px;padding:13px 9px 12px;border-radius:16px}.plan-zoom-toolbar span{font-size:10px}.plan-preview-sheet .legend-pill{font-size:11px;padding:8px 9px;min-height:38px}}
+@media print{.plan-preview-sheet{box-shadow:none!important;border:0!important;margin:0!important}.plan-zoom-toolbar,.dim-settings{display:none!important}.plan-preview-sheet .plan-legend{display:flex!important}}
+</style><style id="firstPointStyles">.fp-card{border:2px solid #2563eb}.fp-card h2{color:#1d4ed8}.fp-result{background:#eff6ff;border-radius:12px;padding:15px;margin-top:12px}.fp-result strong{font-size:25px;display:block;color:#172033}.fp-card .fp-explain{font-size:12px;color:#475569;margin-top:8px;line-height:1.6}.fp-card .fp-error{color:#9a3412;font-weight:650;margin-top:10px}.fp-card details{margin-top:10px}.fp-card summary{cursor:pointer;font-weight:650}</style></head><body data-view="mur"><header><h1>Ridfou Art Accroche Pro</h1><div class="muted" style="color:#cbd5e1">Mur, œuvres, croquis et points de perçage</div></header><main><div><section class="card app-screen" id="secMur" data-screens="mur"><h2>1. Mur</h2><div class="grid"><div><label>Largeur (cm)</label><input id="mw" type="number" min="1" placeholder="À renseigner"></div><div><label>Hauteur (cm)</label><input id="mh" type="number" min="1" placeholder="À renseigner"></div></div></section><section class="card app-screen" id="secCroquis" data-screens="mur"><h2>2. Photo de ton croquis</h2><p class="muted">Choisis une photo ou prends-en une avec ton iPhone. Elle s'affiche ici pour t'aider à reproduire ton accrochage.</p><input id="photoFile" type="file" accept="image/*"><p id="photoStatus" class="muted">Aucune photo sélectionnée.</p><img id="photo" alt="Ton croquis"><div id="photoTools" class="hide"><div class="grid"><div><label>Opacité</label><input id="opacity" type="range" min="10" max="100" value="100"></div><div><label>Rotation</label><button type="button" id="rotate">Tourner de 90°</button></div></div><div class="row" style="margin-top:8px"><button type="button" id="removePhoto">Supprimer la photo</button></div></div></section><section class="card app-screen" id="secOeuvres" data-screens="oeuvres attaches"><h2 id="worksHeading">3. Œuvres</h2><div class="row"><button type="button" id="addWork" class="primary">+ Ajouter une œuvre</button><button type="button" id="makeSeries">Créer une série</button></div><p class="muted">Une œuvre au départ. Ajoute autant d’œuvres que nécessaire, chacune avec ses propres dimensions et 1 à 9 points d’accroche. Pour 4 à 9 points, indique aussi la hauteur de la dernière rangée d’attaches.</p><div id="works"></div><div id="seriesOptions" class="hide"><h3 style="font-size:14px">Disposition en grille</h3><div class="grid"><div><label>Colonnes</label><input id="cols" type="number" min="1" value="2"></div><div><label>Écart horizontal (cm)</label><input id="gx" type="number" min="0" value="15"></div><div><label>Écart vertical (cm)</label><input id="gy" type="number" min="0" value="10"></div></div><p class="muted">Les œuvres sont disposées dans l'ordre de la liste, de gauche à droite puis de haut en bas.</p></div></section><section class="card app-screen" id="secHauteur" data-screens="attaches"><h2>4. Hauteur d'accrochage</h2><label>Positionner selon</label><select id="ref"><option value="center">Centre de l'œuvre / rangée</option><option value="bottom">Bas de l'ensemble</option><option value="top">Haut de l'ensemble</option><option value="gap">Milieu de l'espace entre deux rangées</option></select><div id="rowChoice" class="hide" style="margin-top:10px"><label>Rangée dont le centre est fixé</label><select id="anchor"></select></div><div id="gapChoice" class="hide" style="margin-top:10px"><label>Espace entre les rangées</label><select id="gapAnchor"></select></div><div style="margin-top:10px"><label>Hauteur choisie depuis le sol (cm)</label><input id="level" type="number" placeholder="À renseigner"></div><div style="margin-top:10px"><label>Répartition horizontale</label><select id="distribution"><option value="equal">Automatique : espaces égaux, bords du mur compris</option><option value="manual">Manuelle : centrer le groupe avec les écarts choisis</option><option value="margins">Marges gauche et droite personnalisées</option><option value="free">Libre : déplacer les œuvres sur le plan</option></select><p class="muted">En automatique, l’espace libre est partagé entre les œuvres et les deux bords du mur. Pour une série en plusieurs rangées, les colonnes sont réparties de la même façon.</p><div id="marginControls" class="hide"><div class="grid"><div><label>Marge gauche (cm)</label><input id="marginLeft" type="number" min="0" value="25"></div><div><label>Marge droite (cm)</label><input id="marginRight" type="number" min="0" value="25"></div></div><p class="muted">L'espace entre les œuvres est calculé avec ces deux marges. Au moins deux colonnes sont nécessaires pour imposer les deux marges.</p></div><p id="freeHelp" class="muted hide">Mode libre : fais glisser les œuvres sur le plan, dans l’onglet Perçage. Les dimensions, attaches et résultats restent synchronisés.</p></div><div style="margin-top:10px"><label>Décalage horizontal du groupe (cm)</label><input id="shift" type="number" value="0"></div></section></div><div class="output"><section class="card app-screen" id="secPercage" data-screens="percage"><h2>Plan d'accrochage</h2><div id="planAlignment" class="plan-alignment" role="group" aria-label="Alignement des œuvres sur le plan"><div class="plan-alignment-title">Changer la ligne de référence</div><div class="plan-alignment-options"><button type="button" data-plan-align="center" aria-pressed="true" class="selected">Aligner les centres</button><button type="button" data-plan-align="top" aria-pressed="false">Aligner les hauts</button><button type="button" data-plan-align="bottom" aria-pressed="false">Aligner les bas</button></div><p id="planAlignHint" class="plan-alignment-hint">La ligne pointillée passe par le milieu des œuvres.</p></div><div class="row" style="justify-content:space-between;margin-bottom:12px"><label style="font-size:14px"><input id="dims" type="checkbox" checked> Afficher les cotes</label><details class="dim-settings"><summary>Réglages des mesures</summary><div id="dimOptions" style="display:none;width:100%;margin-top:10px;padding:12px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc"><div style="font-weight:700;margin-bottom:8px">Cotes des œuvres</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px"><button type="button" id="dimAll">Toutes</button><button type="button" id="dimNone">Aucune</button><span id="dimWorks" style="display:flex;flex-wrap:wrap;gap:9px;align-items:center"></span></div><div style="font-weight:700;margin-bottom:7px">Sélectionner les points</div><div class="row" style="margin-bottom:8px"><button type="button" id="pointsAll">Tous les points</button><button type="button" id="pointsNone">Aucun point</button></div><div id="dimPoints" style="display:grid;gap:8px;margin-bottom:12px"></div><div style="font-weight:700;margin-bottom:7px">Types de cotes</div><div style="display:flex;flex-wrap:wrap;gap:12px"><label style="font-size:13px;color:#c46a08"><input type="checkbox" id="dimHeight" checked> Hauteurs depuis le sol</label><label style="font-size:13px;color:#15803d"><input type="checkbox" id="dimEdge" checked> Mur → points sélectionnés</label><label style="font-size:13px;color:#2563eb"><input type="checkbox" id="dimGap" checked> Entraxes successifs</label><label style="font-size:13px;color:#9333ea"><input type="checkbox" id="dimWorkGap" checked> Espacements entre les œuvres</label></div><p style="font-size:12px;color:#475569;margin:8px 0 0">Les œuvres restent visibles. Seules les cotes sélectionnées sont affichées.</p></div></details><button id="download" type="button">Exporter le plan SVG</button><button id="printPlan" type="button">Imprimer / PDF</button></div><div class="plan-tools"><button id="togglePlanLock" type="button">🔓 Verrouiller le plan</button><span class="plan-lock-msg" id="planLockHint">Plan modifiable.</span></div><section class="plan-preview-sheet" aria-label="Plan interactif et ses légendes"><div class="plan-preview-header"><div class="plan-preview-title" id="planVisualTitle">PLAN D’ACCROCHAGE</div><div class="plan-preview-subtitle" id="planVisualSubtitle">Dimensions et alignement de la composition</div></div><div class="plan-zoom-toolbar"><button type="button" id="planZoom" aria-pressed="false">Agrandir le plan ⤢</button><span>Plan interactif : les cotes évoluent avec les œuvres</span></div><div class="plan"><svg id="drawing" viewBox="0 0 820 580" aria-label="Plan d'accrochage interactif"></svg></div><h3 class="plan-legend-title">Lecture des cotes</h3><div id="planLegend" class="plan-legend"></div><div class="plan-legend-footer"><span id="planLegendNote" class="muted"></span><span class="muted">Clique sur une légende pour afficher ou masquer les cotes correspondantes.</span></div></section><p id="warnings" class="warn"></p><div id="holeToHole"></div><div id="results"></div></section><section class="card app-screen" id="secCalculs" data-screens="calculs"><h2>Calculs détaillés</h2><div class="formula-library" id="formulaLibrary"><h2>Formules — calculer soi-même</h2><p class="muted">Les formules ci-dessous sont consultables à tout moment, même sans remplir le plan. Toutes les distances sont en cm. Elles n'effacent pas les calculs automatiques.</p><div class="library-tools"><button type="button" id="formulasShow">Tout afficher</button><button type="button" id="formulasHide">Tout masquer</button></div>
+<details class="manual-formula"><summary>1. Hauteur d’accrochage : milieu, haut et bas</summary><div class="formula-body"><p>C = hauteur choisie pour le milieu, H = hauteur de l’œuvre, A = distance du haut de l’œuvre à l’attache.</p><div class="equation">Bas = C − (H ÷ 2)<br>Haut = C + (H ÷ 2)<br>Hauteur du trou = C + (H ÷ 2) − A</div><p>Exemple : milieu à 150 cm, œuvre haute de 150 cm, attache à 10 cm du haut → <strong>150 + 75 − 10 = 215 cm du sol</strong>.</p><p>Si tu alignes par le haut : trou = hauteur du haut − A. Par le bas : trou = hauteur du bas + H − A. La hauteur du milieu est un choix, pas une obligation de 150 cm.</p></div></details>
+<details class="manual-formula"><summary>2. Premier trou, deuxième trou et entraxe</summary><div class="formula-body"><p>X = bord gauche de l’œuvre depuis le mur, L = largeur de l’œuvre, AG = retrait de l’attache gauche, AD = retrait de l’attache droite.</p><div class="equation">Trou 1 depuis le mur = X + AG<br>Entraxe = L − AG − AD<br>Trou 2 = trou 1 + entraxe</div><p>Exemple : œuvre large de 120 cm, deux attaches à 5 cm de chaque bord → <strong>110 cm d’entraxe</strong>.</p></div></details>
+<details class="manual-formula"><summary>3. Se déplacer de trou à trou</summary><div class="formula-body"><p>Prends le dernier trou percé comme point de départ : X et Y sont ses coordonnées horizontale et verticale.</p><div class="equation">Déplacement horizontal = X du prochain trou − X du dernier trou<br>Déplacement vertical = Y du prochain trou − Y du dernier trou</div><p>Résultat horizontal positif = droite ; négatif = gauche. Résultat vertical positif = monter ; négatif = descendre.</p><p>Exemple : <strong>158,3 − 116,7 = 41,6 cm à droite</strong> ; <strong>205 − 215 = −10 cm, donc descendre de 10 cm</strong>.</p></div></details>
+<details class="manual-formula"><summary>4. Espacer régulièrement les œuvres sur le mur</summary><div class="formula-body"><p>M = largeur du mur, n = nombre d’œuvres. Additionne leurs largeurs.</p><div class="equation">Écart égal, bords compris = (M − somme des largeurs) ÷ (n + 1)</div><p>Exemple : mur 300 cm, deux œuvres de 100 cm → <strong>(300 − 200) ÷ 3 = 33,3 cm</strong> pour les trois espaces.</p><p>Avec une marge gauche G et droite D choisies : <strong>écart entre œuvres = (M − somme des largeurs − G − D) ÷ (n − 1)</strong>, pour au moins deux œuvres.</p></div></details>
+</div><details open><summary>Détails des calculs — étape par étape</summary><div id="formula" class="calc-details"></div></details></section></div></main><nav id="appTabs" class="bottom-nav" aria-label="Navigation principale"><button type="button" class="bottom-tab" data-view="mur" aria-label="Mur" aria-current="page"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6"/></svg><span>Mur</span></button><button type="button" class="bottom-tab" data-view="oeuvres" aria-label="Œuvres" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m21 15-5-5L5 21"/></svg><span>Œuvres</span></button><button type="button" class="bottom-tab" data-view="attaches" aria-label="Attaches" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 21 4-9 5-3-6-6-3 5-9 4 9 9Z"/><path d="M12 8 8 12"/></svg><span>Attaches</span></button><button type="button" class="bottom-tab" data-view="percage" aria-label="Perçage" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Perçage</span></button><button type="button" class="bottom-tab" data-view="calculs" aria-label="Calculs" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8v3H8zM8 13h2m4 0h2m-8 4h2m4 0h2"/></svg><span>Calculs</span></button></nav><script>
+'use strict';const $=id=>document.getElementById(id);const val=id=>$(id).value===''?NaN:Number($(id).value);const f=n=>Number.isFinite(n)?Number(n.toFixed(1)).toLocaleString('fr-FR'):'—';let works=[{id:1,name:'',w:'',h:'',points:'2',top:'',left:'',right:'',bottom:''}],nextId=2,series=false,photoUrl=null,angle=0;let planLocked=false, dragging=null;let planAlignment='center';let showDrillPoints=true;const freePositions=new Map();let drawingGeometry=null;const ns='http://www.w3.org/2000/svg';const selectedDims=new Set([1]);const selectedPoints=new Map();function pointEnabled(t,i){const ids=selectedPoints.get(t.a.id);return !ids||ids.has(i)}function refreshPointChoices(){const host=$('dimPoints');host.replaceChildren();works.forEach((w,i)=>{const row=document.createElement('div');row.style.cssText='display:flex;gap:12px;flex-wrap:wrap;align-items:center';const name=document.createElement('strong');name.textContent=workLabel(w,i);row.append(name);const n=Math.max(1,Number(w.points)||1);for(let j=0;j<n;j++){const label=document.createElement('label');label.style.cssText='display:inline-flex;gap:5px;align-items:center;font-size:13px';const cb=document.createElement('input');cb.type='checkbox';cb.checked=!selectedPoints.has(w.id)||selectedPoints.get(w.id).has(j);cb.onchange=()=>{if(!selectedPoints.has(w.id))selectedPoints.set(w.id,new Set(Array.from({length:n},(_,k)=>k)));if(cb.checked)selectedPoints.get(w.id).add(j);else selectedPoints.get(w.id).delete(j);draw()};label.append(cb,document.createTextNode('Trou '+(j+1)));row.append(label)}host.append(row)})}function refreshDimChoices(){const host=$('dimWorks');host.replaceChildren();works.forEach((w,i)=>{const label=document.createElement('label');label.style.cssText='display:inline-flex;align-items:center;gap:4px;font-size:13px';const cb=document.createElement('input');cb.type='checkbox';cb.checked=selectedDims.has(w.id);cb.addEventListener('change',()=>{if(cb.checked)selectedDims.add(w.id);else selectedDims.delete(w.id);draw()});label.append(cb,document.createTextNode(workLabel(w,i)));host.appendChild(label)});refreshPointChoices()}
+function workLabel(a,i){return String(a.name||'').trim()||'Œuvre '+(i+1)}
+function make(tag,attrs={},text=''){let e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text)e.textContent=text;$('drawing').appendChild(e);return e}
+
+function setDimPanel(){const on=$('dims').checked;$('dimOptions').style.display=on?'block':'none'}
+function toggleLegendDim(id){const wasVisible=$('dims').checked;if(!wasVisible){$('dims').checked=true;setDimPanel()}const el=$(id);el.checked=wasVisible?!el.checked:true;draw()}
+function renderPlanLegend(){const host=$('planLegend');if(!host)return;host.replaceChildren();
+ const items=[
+  {label:'Points de perçage',color:'#dc2626',kind:'dot',active:showDrillPoints,click:()=>{showDrillPoints=!showDrillPoints;draw()}},
+  {label:'Mur → 1er trou',color:'#15803d',kind:'line',active:$('dims').checked&&$('dimEdge').checked,click:()=>toggleLegendDim('dimEdge')},
+  {label:'Entraxes',color:'#2563eb',kind:'line',active:$('dims').checked&&$('dimGap').checked,click:()=>toggleLegendDim('dimGap')},
+  {label:'Hauteurs',color:'#d97706',kind:'line',active:$('dims').checked&&$('dimHeight').checked,click:()=>toggleLegendDim('dimHeight')},
+  {label:'Espacements',color:'#9333ea',kind:'line',active:$('dims').checked&&$('dimWorkGap').checked,click:()=>toggleLegendDim('dimWorkGap')}
+ ];
+ items.forEach(cfg=>{const btn=document.createElement('button');btn.type='button';const shown=cfg.kind==='dot'?cfg.active:($('dims').checked&&cfg.active);btn.className='legend-pill'+(shown?' active':'');btn.setAttribute('aria-pressed',String(shown));btn.style.setProperty('--legend-accent',cfg.color);btn.setAttribute('aria-pressed',String(cfg.active&&($('dims').checked||cfg.kind==='dot')));btn.onclick=cfg.click;const icon=document.createElement('span');icon.className=cfg.kind==='dot'?'legend-dot':'legend-line';btn.append(icon,document.createTextNode(cfg.label));host.append(btn)});
+ const note=$('planLegendNote');if(note){const d=layout(),first=d.items[0],offset=first?(planAlignment==='top'?first.h:planAlignment==='bottom'?0:first.h/2):0;
+  const guide=(first&&Number.isFinite(first.y))?first.y+offset:NaN;
+  const label=planAlignment==='top'?'bords hauts':planAlignment==='bottom'?'bords bas':'milieux';
+  note.textContent=d.rows>1?'Pointillés : axes des '+label+' de chaque rangée.':'Pointillés : axe commun des '+label+(Number.isFinite(guide)?' à '+f(guide)+' cm du sol.':'.');}
+}
+
+let planZoomed=false;function renderWorks(){const wrap=$('works');wrap.replaceChildren();works.forEach((a,i)=>{const box=document.createElement('div');box.className='work';box.innerHTML=`<h3 class="work-heading"></h3><div class="grid"><div class="work-dim" style="grid-column:1/-1"><label>Nom de l’œuvre (facultatif)</label><input data-k="name" type="text" maxlength="80" placeholder="Œuvre ${i+1}" autocomplete="off"></div><div class="work-dim"><label>Largeur (cm)</label><input data-k="w" type="number" min="0" placeholder="À renseigner"></div><div class="work-dim"><label>Hauteur (cm)</label><input data-k="h" type="number" min="0" placeholder="À renseigner"></div><div class="work-attach"><label>Points d'accroche</label><select data-k="points"><option value="1">1 point</option><option value="2">2 points</option><option value="3">3 points</option><option value="4">4 points</option><option value="5">5 points</option><option value="6">6 points</option><option value="7">7 points</option><option value="8">8 points</option><option value="9">9 points</option></select></div><div class="work-attach"><label>Attaches depuis le haut (cm)</label><input data-k="top" type="number" min="0" placeholder="À renseigner"></div><div class="side work-attach"><label>Attache depuis la gauche (cm)</label><input data-k="left" type="number" min="0" placeholder="À renseigner"></div><div class="side work-attach"><label>Attache depuis la droite (cm)</label><input data-k="right" type="number" min="0" placeholder="À renseigner"></div><div class="bottom work-attach"><label>Dernière rangée d’attaches depuis le bas (cm)</label><input data-k="bottom" type="number" min="0" placeholder="À renseigner"></div></div><div class="row" style="margin-top:10px"><button type="button" class="remove">Supprimer cette œuvre</button></div>`;box.querySelector('.work-heading').textContent=workLabel(a,i);for(const inp of box.querySelectorAll('[data-k]')){const k=inp.dataset.k;inp.value=a[k];inp.addEventListener('input',()=>{a[k]=inp.value;if(k==='points')toggleWork(box,a);if(k==='name'){box.querySelector('.work-heading').textContent=workLabel(a,i);refreshDimChoices()}draw();})}box.querySelector('.remove').disabled=works.length===1;box.querySelector('.remove').onclick=()=>{works=works.filter(w=>w.id!==a.id);renderWorks();draw()};wrap.appendChild(box);toggleWork(box,a)});refreshDimChoices();applyPlanLock()}
+function toggleWork(box,a){box.querySelectorAll('.side').forEach(e=>e.classList.toggle('hide',Number(a.points)===1));box.querySelector('.bottom').classList.toggle('hide',Number(a.points)<4)}
+function layout(){const W=val('mw'),H=val('mh'),height=val('level'),gx=series?val('gx'):15,gy=series?val('gy'):10,cols=series?Math.max(1,Math.floor(val('cols')||1)):works.length;const rows=Math.ceil(works.length/cols);const items=works.map((a,i)=>({a,i,c:i%cols,r:Math.floor(i/cols),w:Number(a.w),h:Number(a.h)}));const widths=Array.from({length:cols},(_,c)=>Math.max(0,...items.filter(t=>t.c===c).map(t=>t.w))),heights=Array.from({length:rows},(_,r)=>Math.max(0,...items.filter(t=>t.r===r).map(t=>t.h)));const mode=$('distribution').value,manualMargins=mode==='margins',freeMode=mode==='free';const marginLeft=Number.isFinite(val('marginLeft'))?val('marginLeft'):0,marginRight=Number.isFinite(val('marginRight'))?val('marginRight'):0;const autoSpace=mode==='equal'&&Number.isFinite(W)&&W>0&&widths.every(v=>v>0);const equalGap=autoSpace?(W-widths.reduce((a,b)=>a+b,0))/(cols+1):NaN;const gapX=autoSpace?equalGap:manualMargins&&cols>1?(W-widths.reduce((a,b)=>a+b,0)-marginLeft-marginRight)/(cols-1):gx;const totalW=widths.reduce((a,b)=>a+b,0)+Math.max(0,cols-1)*gapX,totalH=heights.reduce((a,b)=>a+b,0)+Math.max(0,rows-1)*gy;const ref=$('ref').value,ar=Math.max(0,Math.min(rows-1,Number($('anchor').value||1)-1)),gr=Math.max(0,Math.min(rows-2,Number($('gapAnchor').value||1)-1));let topY;if(ref==='top')topY=height;else if(ref==='bottom')topY=height+totalH;else if(ref==='gap')topY=height+heights.slice(0,gr+1).reduce((a,b)=>a+b,0)+gr*gy+gy/2;else topY=height+heights.slice(0,ar).reduce((a,b)=>a+b,0)+ar*gy+heights[ar]/2;let xx=autoSpace?gapX:manualMargins?cols===1?marginLeft+(W-widths[0]-marginLeft-marginRight)/2:marginLeft:(W-totalW)/2+(val('shift')||0);const xCols=widths.map(w=>{const x=xx;xx+=w+gapX;return x});let yy=topY;const rowTops=heights.map(h=>{const y=yy;yy-=h+gy;return y});items.forEach(t=>{t.x=xCols[t.c]+(widths[t.c]-t.w)/2;t.y=planAlignment==='top'?rowTops[t.r]-t.h:planAlignment==='bottom'?rowTops[t.r]-heights[t.r]:rowTops[t.r]-heights[t.r]/2-t.h/2;if(freeMode){if(!freePositions.has(t.a.id))freePositions.set(t.a.id,{x:t.x,y:t.y});const p=freePositions.get(t.a.id);t.x=p.x;t.y=p.y;}t.holes=[];const a=t.a,top=Number(a.top),left=Number(a.left),right=Number(a.right),bottom=Number(a.bottom);if(a.top!==''&&top>=0&&top<=t.h){const count=Number(a.points);const sidesOk=a.left!==''&&a.right!==''&&left>=0&&right>=0&&left+right<=t.w;
+const colsH=count===1?1:count===2?2:count===4?2:Math.min(3,count);
+const rowsH=Math.ceil(count/colsH);
+if(colsH===1||sidesOk){
+ const xs=Array.from({length:colsH},(_,j)=>colsH===1?t.w/2:left+(t.w-left-right)*j/(colsH-1));
+ const hasBottom=a.bottom!==''&&bottom>=0&&bottom<=t.h&&bottom<=t.h-top;
+ if(rowsH===1||hasBottom){
+  for(let k=0;k<count;k++){const row=Math.floor(k/colsH),col=k%colsH;const yy=rowsH===1?t.h-top:t.h-top-(t.h-top-bottom)*row/(rowsH-1);t.holes.push({x:t.x+xs[col],y:t.y+yy})}
+ }
+}}});return {W,H,height,gx:gapX,gy,cols,rows,items,totalW,totalH,topY,heights,ref,widths,xCols,autoSpace,equalGap,manualMargins,freeMode,marginLeft,marginRight}}
+function draw(){const s=$('drawing');s.replaceChildren();const d=layout();const {W,H,items}=d;const wall=Number.isFinite(W)&&W>0&&Number.isFinite(H)&&H>0;const ww=wall?W:400,hh=wall?H:280;const sc=Math.min(760/ww,500/hh),originX=35,originY=hh*sc+43,svgW=ww*sc+70,svgH=hh*sc+85;drawingGeometry={sc,originX,originY,W:ww,H:hh};const count=works.length;const title=$('planVisualTitle'),sub=$('planVisualSubtitle');if(title)title.textContent='PLAN D’ACCROCHAGE — '+count+' ŒUVRE'+(count>1?'S':'');if(sub)sub.textContent=(wall?'Mur '+f(W)+' × '+f(H)+' cm':'Dimensions du mur à renseigner')+' • '+(planAlignment==='top'?'Alignement des hauts':planAlignment==='bottom'?'Alignement des bas':'Alignement des milieux')+(Number.isFinite(d.height)?' à '+f(d.height)+' cm':'');s.setAttribute('viewBox',`0 0 ${svgW} ${svgH}`);s.classList.toggle('free-drag',d.freeMode&&!planLocked);const X=x=>originX+x*sc,Y=y=>originY-y*sc;make('rect',{width:svgW,height:svgH,fill:'#f8fafc'});make('rect',{x:X(0),y:Y(hh),width:ww*sc,height:hh*sc,fill:'white',stroke:'#64748b','stroke-width':2});make('line',{x1:X(0)-12,y1:Y(0),x2:X(ww)+12,y2:Y(0),stroke:'#334155','stroke-width':2});make('text',{x:X(0),y:Y(0)+20,fill:'#334155','font-size':13},'SOL');const valid=wall&&Number.isFinite(d.height)&&items.every(t=>t.a.w!==''&&t.a.h!==''&&t.w>0&&t.h>0)&&d.gx>=0&&d.gy>=0;let warnings=[];if(d.autoSpace&&d.gx<0)warnings.push('Les œuvres sont plus larges que le mur : la répartition automatique est impossible.');if(d.manualMargins&&d.gx<0)warnings.push('Les marges et les œuvres dépassent la largeur du mur : réduis une marge ou la largeur du groupe.');if(valid){items.forEach(t=>{make('rect',{x:X(t.x),y:Y(t.y+t.h),width:t.w*sc,height:t.h*sc,fill:'#dbeafe',stroke:'#2563eb','stroke-width':2,'data-draggable-work':d.freeMode?t.a.id:''});const name=String(t.a.name||'').trim();
+  const availableWidth=Math.max(18,t.w*sc-12);
+  const heading='Œuvre '+(t.i+1);
+  const fontSize=Math.max(9,Math.min(16,Math.floor(availableWidth/Math.max(heading.length,1)/0.55)));
+  const centerY=Y(t.y+t.h/2),nameY=Math.min(Y(t.y)+Math.max(13,0.4*t.h*sc),centerY+fontSize+15);
+  make('text',{x:X(t.x+t.w/2),y:nameY,'text-anchor':'middle','font-size':fontSize,'font-weight':'750',fill:'#1e365c','pointer-events':'none'},heading);
+  if(name){const small=Math.max(8,Math.min(12,Math.floor(availableWidth/Math.max(name.length,1)/0.55)));
+   const availableChars=Math.max(4,Math.floor(availableWidth/(small*.55)));
+   const shown=name.length>availableChars?name.slice(0,Math.max(3,availableChars-1))+'…':name;
+   const subtitle=make('text',{x:X(t.x+t.w/2),y:nameY+small+6,'text-anchor':'middle','font-size':small,fill:'#60758a','pointer-events':'none'},shown);
+   const tip=document.createElementNS(ns,'title');tip.textContent=name;subtitle.appendChild(tip);
+  }if(showDrillPoints)t.holes.forEach(p=>make('circle',{cx:X(p.x),cy:Y(p.y),r:4,fill:'#dc2626',stroke:'white','stroke-width':1,'pointer-events':'none'}))});// La ligne pointillée passe par le repère réellement sélectionné dans chaque rangée.
+const alignOffset=t=>planAlignment==='top'?t.h:planAlignment==='bottom'?0:t.h/2;
+for(let r=0;r<d.rows;r++){
+ const row=items.filter(t=>t.r===r);
+ if(!row.length)continue;
+ const guide=row[0].y+alignOffset(row[0]);
+ if(Number.isFinite(guide)&&guide>=0&&guide<=H){make('line',{x1:X(0),y1:Y(guide),x2:X(W),y2:Y(guide),stroke:'#b45346','stroke-width':1.7,'stroke-dasharray':'7 5','pointer-events':'none'});}
+ row.forEach(t=>make('circle',{cx:X(t.x+t.w/2),cy:Y(t.y+alignOffset(t)),r:3,fill:'#fff',stroke:'#b45346','stroke-width':1.4,'pointer-events':'none'}));
+}if(items.some(t=>t.x<0||t.y<0||t.x+t.w>W||t.y+t.h>H))warnings.push('Une ou plusieurs œuvres dépassent les limites du mur.');if(items.some(t=>t.holes.length===0))warnings.push('Renseigne les mesures des attaches pour afficher les perçages de chaque œuvre.');if($('dims').checked){
+
+const selected=items.filter(t=>selectedDims.has(t.a.id));
+const displayedHeights=new Set();
+selected.forEach((t,si)=>{
+ const pts=t.holes.map((p,i)=>({...p,idx:i})).sort((a,b)=>a.x-b.x);
+ const active=pts.filter(p=>pointEnabled(t,p.idx));if(!active.length&&!$('dimGap').checked)return;
+ const line=(x1,y1,x2,y2,color)=>make('line',{x1,y1,x2,y2,stroke:color,'stroke-width':1.4});
+ const label=(x,y,value,color)=>make('text',{x,y,'text-anchor':'middle','font-size':12,'font-weight':'600',fill:color,'paint-order':'stroke',stroke:'#fff','stroke-width':3},value);
+ // Mesures vertes et bleues au voisinage immédiat des points, par niveaux.
+ if($('dimEdge').checked&&active.length){
+  const p=active[0];
+  const greenCount=selected.filter(t=>t.holes.some((_,i)=>pointEnabled(t,i))).length;
+  const y=Y(H)+17+Math.max(0,greenCount-1-si)*17;
+  line(X(0),y,X(p.x),y,'#15803d');line(X(0),y-4,X(0),y+4,'#15803d');line(X(p.x),y-4,X(p.x),y+4,'#15803d');
+  make('line',{x1:X(p.x),y1:y,x2:X(p.x),y2:Y(p.y)-6,stroke:'#15803d','stroke-width':1.3,'stroke-dasharray':'2.7 4.7','pointer-events':'none'});
+  label((X(0)+X(p.x))/2,y-5,f(p.x)+' cm','#15803d');
+ }
+ if($('dimGap').checked){for(let j=1;j<pts.length;j++){
+  const a=pts[j-1],b=pts[j];
+  const y=Y(t.y+t.h*0.76)+((j-1)%2)*14;
+  line(X(a.x),y,X(b.x),y,'#2563eb');line(X(a.x),y-4,X(a.x),y+4,'#2563eb');line(X(b.x),y-4,X(b.x),y+4,'#2563eb');
+  line(X(a.x),y,X(a.x),Y(a.y)-5,'#2563eb');line(X(b.x),y,X(b.x),Y(b.y)-5,'#2563eb');
+  label((X(a.x)+X(b.x))/2,y-5,f(b.x-a.x)+' cm','#2563eb');
+ }}
+ if($('dimHeight').checked){active.forEach((p,j)=>{
+  const heightKey=Math.round(p.y*10)/10;
+  if(displayedHeights.has(heightKey))return;
+  displayedHeights.add(heightKey);
+  const x=X(p.x)+8+(j%2)*8;
+  line(x,Y(0),x,Y(p.y),'#d97706');line(x-4,Y(0),x+4,Y(0),'#d97706');line(x-4,Y(p.y),x+4,Y(p.y),'#d97706');
+  line(X(p.x)+4,Y(p.y),x,Y(p.y),'#d97706');
+  const mid=(Y(0)+Y(p.y))/2;
+  const text=make('text',{x:x+5,y:mid,'font-size':12,'font-weight':'600',fill:'#c46a08','paint-order':'stroke',stroke:'#fff','stroke-width':3},f(p.y)+' cm');
+  text.setAttribute('transform',`rotate(-90 ${x+5} ${mid})`);
+ })}
+});
+// Cotations violettes : espaces libres entre les bords des œuvres, indépendants des points sélectionnés.
+if($('dimWorkGap').checked){
+ const purple='#9333ea';
+ const gapLine=(x1,y1,x2,y2)=>make('line',{x1,y1,x2,y2,stroke:purple,'stroke-width':1.5});
+ const gapText=(x,y,v)=>make('text',{x,y,'text-anchor':'middle','font-size':12,'font-weight':'600',fill:purple,'paint-order':'stroke',stroke:'#fff','stroke-width':3},f(v)+' cm');
+ // Espaces horizontaux : œuvres voisines dans la même rangée.
+ for(let r=0;r<d.rows;r++){
+  const row=items.filter(t=>t.r===r).sort((a,b)=>a.x-b.x);
+  if(row.length){
+   const first=row[0],last=row[row.length-1];
+   for(const [left,right] of [[0,first.x],[last.x+last.w,W]]){
+    const y=Math.min(Y(0)-18,Math.max(...row.map(t=>Y(t.y)))+22);
+    const x1=X(left),x2=X(right);gapLine(x1,y,x2,y);gapLine(x1,y-5,x1,y+5);gapLine(x2,y-5,x2,y+5);gapText((x1+x2)/2,y-7,right-left);
+   }
+  }
+  for(let k=1;k<row.length;k++){
+   const a=row[k-1],b=row[k],space=b.x-(a.x+a.w);
+   if(space<0)continue;
+   const y=Math.min(Y(0)-18,Math.max(...row.map(t=>Y(t.y)))+22);
+   const x1=X(a.x+a.w),x2=X(b.x);
+   gapLine(x1,y,x2,y);gapLine(x1,y-5,x1,y+5);gapLine(x2,y-5,x2,y+5);
+   gapText((x1+x2)/2,y-7,space);
+  }
+ }
+ // Espaces verticaux : rangées voisines, au niveau des œuvres qui se font face.
+ for(let r=0;r<d.rows-1;r++){
+  const upper=items.filter(t=>t.r===r),lower=items.filter(t=>t.r===r+1);
+  for(const a of upper){
+   const candidates=lower.filter(b=>Math.min(a.x+a.w,b.x+b.w)>Math.max(a.x,b.x));
+   if(!candidates.length)continue;
+   const b=candidates.reduce((best,c)=>Math.min(a.x+a.w,c.x+c.w)-Math.max(a.x,c.x)>Math.min(a.x+a.w,best.x+best.w)-Math.max(a.x,best.x)?c:best);
+   const space=a.y-(b.y+b.h);if(space<0)continue;
+   const x=X((Math.max(a.x,b.x)+Math.min(a.x+a.w,b.x+b.w))/2);
+   const y1=Y(a.y),y2=Y(b.y+b.h);
+   gapLine(x,y1,x,y2);gapLine(x-5,y1,x+5,y1);gapLine(x-5,y2,x+5,y2);
+   const txt=make('text',{x:x+8,y:(y1+y2)/2,'font-size':12,'font-weight':'600',fill:purple,'paint-order':'stroke',stroke:'#fff','stroke-width':3},f(space)+' cm');
+   txt.setAttribute('transform',`rotate(-90 ${x+8} ${(y1+y2)/2})`);
+  }
+ }
+}
+}}else{make('text',{x:410,y:265,'text-anchor':'middle','font-size':18,fill:'#64748b'},'Renseigne le mur, les œuvres et la hauteur');make('text',{x:410,y:290,'text-anchor':'middle','font-size':13,fill:'#64748b'},'Le plan et les perçages apparaîtront ici')} $('warnings').textContent=warnings.join(' ');renderPlanLegend();const result=$('results');result.replaceChildren();if(valid)items.forEach(t=>{const box=document.createElement('div');box.className='result';const coords=t.holes.map((p,i)=>{const previous=t.holes[i-1];return `Trou ${i+1} : <b style="color:#c46a08">${f(p.y)} cm depuis le sol</b> · ${i===0?`<span style="color:#15803d">${f(p.x)} cm depuis le bord gauche du mur</span>`:`<span style="color:#2563eb">${f(p.x-previous.x)} cm d’entraxe depuis le trou ${i}</span> <small>(${f(p.x)} cm depuis le bord gauche)</small>`}`}).join('<br>');box.innerHTML=`<b></b><br>${coords||'Attaches à renseigner'}`;box.querySelector('b').textContent=workLabel(t.a,t.i);result.appendChild(box)});renderHoleToHole(d,valid);renderCalculations(d,valid)}
+
+function renderHoleToHole(d,valid){
+ const root=$('holeToHole');root.replaceChildren();
+ const title=document.createElement('h3');title.textContent='⚡ Perçage rapide — de trou à trou';title.className='drill-title';root.append(title);
+ if(!valid){const p=document.createElement('p');p.className='drill-help';p.textContent='Renseigne le mur, les œuvres et leur hauteur dans les onglets pour afficher les trous ici.';root.append(p);return}
+ const makeText=(tag,cls,t)=>{const node=document.createElement(tag);node.className=cls;node.textContent=t;return node};
+ const addMeasure=(card,description,value,direction,comment='',tone='blue')=>{
+  const line=document.createElement('div');line.className='drill-measure';line.dataset.tone=tone;
+  line.append(makeText('div','drill-label',description));
+  const n=document.createElement('div');n.className='drill-number';n.append(makeText('strong','',value),makeText('span','drill-arrow',direction));line.append(n);
+  if(comment)line.append(makeText('div','drill-note',comment));card.append(line);
+ };
+ let previous=null,previousLabel='',previousIndex=-1;
+ d.items.forEach(t=>{
+  if(!t.holes.length){const warning=document.createElement('div');warning.className='drill-missing';warning.textContent=workLabel(t.a,t.i)+' : renseigne ses attaches dans l’onglet « Attaches » pour obtenir les perçages.';root.append(warning);previous=null;previousLabel='';previousIndex=-1;return}
+  t.holes.forEach((p,i)=>{
+   const label=workLabel(t.a,t.i)+' — trou '+(i+1);
+   const card=document.createElement('article');card.className='drill-card';
+   card.append(makeText('h4','drill-card-title','🔴 '+label));
+   if(!previous){
+    addMeasure(card,'Distance depuis la GAUCHE du mur',f(p.x)+' cm','→','','green');
+    addMeasure(card,'Hauteur depuis le SOL',f(p.y)+' cm','↑','','orange');
+   }else{
+    const dx=Number((Number(p.x.toFixed(1))-Number(previous.x.toFixed(1))).toFixed(1));
+    const dy=Number((Number(p.y.toFixed(1))-Number(previous.y.toFixed(1))).toFixed(1));
+    const sameWork=t.i===previousIndex;
+    card.append(makeText('div','drill-from','Depuis '+previousLabel));
+    addMeasure(card,sameWork?'Entraxe depuis le trou précédent':'Déplacement horizontal',f(Math.abs(dx))+' cm',dx>0?'→':dx<0?'←':'•',dx===0?'Même axe horizontal':dx>0?'Vers la droite':'Vers la gauche');
+    addMeasure(card,'Déplacement vertical',f(Math.abs(dy))+' cm',dy>0?'↑':dy<0?'↓':'—',dy===0?'Rester à la même hauteur':dy>0?'Monter':'Descendre');
+    addMeasure(card,'Hauteur du trou depuis le SOL',f(p.y)+' cm','↑','','orange');
+    card.append(makeText('p','drill-absolute','Repère de contrôle : '+f(p.x)+' cm depuis la gauche du mur.'));
+   }
+   root.append(card);previous=p;previousLabel=label;previousIndex=t.i;
+  });
+ });
+}
+
+function renderCalculations(d,valid){
+ const root=$('formula');root.replaceChildren();if(!valid){root.textContent='Renseigne les dimensions du mur, des œuvres et la hauteur de référence pour afficher les opérations.';return}
+ const add=(title,steps)=>{const h=document.createElement('h3');h.textContent=title;root.append(h);steps.forEach(([desc,eq,kind])=>{const div=document.createElement('div');div.className='calc-step'+(kind?' calc-result':'');const label=document.createElement('div');label.textContent=desc;const value=document.createElement('strong');value.textContent=eq;div.append(label,value);root.append(div)})};
+ const {W,H,items,widths,cols,rows,autoSpace,ref}=d;const sum=widths.reduce((a,b)=>a+b,0);const free=W-sum;
+ add('1. Mur et dimensions',[[ 'Dimensions du mur',f(W)+' cm de largeur × '+f(H)+' cm de hauteur'],...items.map(t=>['Largeur et hauteur de '+workLabel(t.a,t.i),f(t.w)+' × '+f(t.h)+' cm'])]);
+ const sumText=widths.map(f).join(' + ');
+ const horizontal=[['Largeur totale des œuvres (ou des colonnes pour une série)',sumText+' = '+f(sum)+' cm'],['Largeur du mur − largeur des œuvres',f(W)+' − '+f(sum)+' = '+f(free)+' cm']];
+ if(autoSpace){horizontal.push(['Nombre d’intervalles égaux : '+cols+' colonne(s) + 1',cols+' + 1 = '+(cols+1)+' espaces'],['Espace libre ÷ nombre d’intervalles',f(free)+' ÷ '+(cols+1)+' = '+f(d.equalGap)+' cm','result']);}
+ else if(d.manualMargins){horizontal.push(['Marge gauche choisie',f(d.marginLeft)+' cm'],['Marge droite choisie',f(d.marginRight)+' cm']);if(cols>1)horizontal.push(['Espace entre colonnes : (mur − œuvres − marges) ÷ (colonnes − 1)','('+f(W)+' − '+f(sum)+' − '+f(d.marginLeft)+' − '+f(d.marginRight)+') ÷ '+(cols-1)+' = '+f(d.gx)+' cm','result']);else horizontal.push(['Une seule colonne','Le groupe est positionné dans l’espace restant ; deux marges exactes nécessitent au moins deux colonnes.']);}
+ else if(d.freeMode){horizontal.push(['Placement libre','Chaque œuvre a sa propre position horizontale et verticale, choisie sur le plan.'],['Repères','Les coordonnées exactes de chaque œuvre et de chaque trou figurent dans les sections suivantes.']);}
+ else {horizontal.push(['Écart horizontal choisi entre colonnes',f(d.gx)+' cm'],['Largeur du groupe (œuvres + intervalles internes)',f(sum)+' + '+(cols-1)+' × '+f(d.gx)+' = '+f(d.totalW)+' cm'],['Marge gauche : groupe centré + décalage', '('+f(W)+' − '+f(d.totalW)+') ÷ 2 + '+f(val('shift')||0)+' = '+f((W-d.totalW)/2+(val('shift')||0))+' cm','result']);}
+ add('2. Répartition horizontale',horizontal);
+ add('3. Position de chaque œuvre',items.flatMap(t=>{const xright=t.x+t.w;return [[workLabel(t.a,t.i)+' — bord gauche depuis le mur',f(t.x)+' cm'],[workLabel(t.a,t.i)+' — bord droit depuis le mur',f(t.x)+' + '+f(t.w)+' = '+f(xright)+' cm']]}));
+ const vert=[['Hauteur de référence saisie',f(d.height)+' cm depuis le sol'],['Mode de positionnement',ref==='center'?'Centre de la rangée choisie':ref==='bottom'?'Bas de l’ensemble':ref==='top'?'Haut de l’ensemble':'Milieu entre deux rangées'],['Hauteur totale de la composition',f(d.totalH)+' cm']];
+ items.forEach(t=>{vert.push([workLabel(t.a,t.i)+' — bas depuis le sol',f(t.y)+' cm'],[workLabel(t.a,t.i)+' — haut depuis le sol',f(t.y)+' + '+f(t.h)+' = '+f(t.y+t.h)+' cm'])});add('4. Calcul des hauteurs',vert);
+ items.forEach(t=>{const a=t.a;const steps=[];const count=Number(a.points);steps.push(['Dimensions',f(t.w)+' cm (largeur) × '+f(t.h)+' cm (hauteur)'],['Nombre de points d’accroche',String(count)]);
+ if(a.top!=='')steps.push(['Attaches depuis le haut de l’œuvre',f(Number(a.top))+' cm']);
+ if(count>1&&a.left!==''&&a.right!==''){const left=Number(a.left),right=Number(a.right);steps.push(['Attache gauche depuis le bord gauche',f(left)+' cm'],['Attache droite depuis le bord droit',f(right)+' cm'],['Distance entre les attaches extrêmes',f(t.w)+' − '+f(left)+' − '+f(right)+' = '+f(t.w-left-right)+' cm']);}
+ if(t.holes.length){t.holes.forEach((p,i)=>{const prev=t.holes[i-1];steps.push(['Trou '+(i+1)+' — hauteur depuis le sol',f(t.y)+' + '+f(p.y-t.y)+' = '+f(p.y)+' cm','result']);if(i===0){steps.push(['Trou 1 — distance depuis le bord gauche du mur',f(t.x)+' + '+f(p.x-t.x)+' = '+f(p.x)+' cm','result']);}else{steps.push(['Trou '+(i+1)+' — entraxe depuis le trou '+i,f(p.x)+' − '+f(prev.x)+' = '+f(p.x-prev.x)+' cm','result'],['Trou '+(i+1)+' — position absolue depuis le mur',f(p.x)+' cm']);}})}else steps.push(['Points de perçage','Mesures des attaches à compléter']);
+ add('5. '+workLabel(t.a,t.i)+' — attaches et perçages',steps)});
+ const gaps=[];for(let r=0;r<rows;r++){const row=items.filter(t=>t.r===r).sort((a,b)=>a.x-b.x);if(!row.length)continue;gaps.push(['Rangée '+(r+1)+' — mur → première œuvre',f(row[0].x)+' cm']);for(let j=1;j<row.length;j++)gaps.push([workLabel(row[j-1].a,row[j-1].i)+' et '+workLabel(row[j].a,row[j].i)+' — espace bord à bord',f(row[j].x)+' − ('+f(row[j-1].x)+' + '+f(row[j-1].w)+') = '+f(row[j].x-row[j-1].x-row[j-1].w)+' cm']);gaps.push(['Rangée '+(r+1)+' — dernière œuvre → mur',f(W)+' − ('+f(row.at(-1).x)+' + '+f(row.at(-1).w)+') = '+f(W-row.at(-1).x-row.at(-1).w)+' cm']);}
+ for(let r=0;r<rows-1;r++){const upper=items.filter(t=>t.r===r),lower=items.filter(t=>t.r===r+1);const bottom=Math.min(...upper.map(t=>t.y)),top=Math.max(...lower.map(t=>t.y+t.h));gaps.push(['Rangées '+(r+1)+' et '+(r+2)+' — espacement vertical',f(bottom)+' − '+f(top)+' = '+f(bottom-top)+' cm']);}
+ add('6. Espacements entre les œuvres et les bords du mur',gaps);
+ const note=document.createElement('p');note.className='calc-note';note.textContent='Les positions des trous correspondent ici aux positions des attaches renseignées. Vérifie sur place tout décalage dû à un crochet ou à un système de fixation avant de percer.';root.append(note);
+}
+
+function selectors(){const rows=Math.ceil(works.length/(series?Math.max(1,Math.floor(val('cols')||1)):works.length));const a=$('anchor').value||'1',g=$('gapAnchor').value||'1';$('anchor').innerHTML=Array.from({length:rows},(_,i)=>`<option value="${i+1}">Rangée ${i+1}</option>`).join('');$('gapAnchor').innerHTML=Array.from({length:Math.max(0,rows-1)},(_,i)=>`<option value="${i+1}">Entre ${i+1} et ${i+2}</option>`).join('');$('anchor').value=Number(a)<=rows?a:'1';$('gapAnchor').value=Number(g)<rows?g:'1';if(rows<2&&$('ref').value==='gap')$('ref').value='center';$('rowChoice').classList.toggle('hide',rows<2||$('ref').value!=='center');$('gapChoice').classList.toggle('hide',rows<2||$('ref').value!=='gap')}
+function refresh(){selectors();draw()}
+$('addWork').onclick=()=>{const showNew=works.every(w=>selectedDims.has(w.id));const added={id:nextId++,name:'',w:'',h:'',points:'2',top:'',left:'',right:'',bottom:''};works.push(added);if(showNew)selectedDims.add(added.id);renderWorks();refresh()};$('makeSeries').onclick=()=>{series=!series;$('seriesOptions').classList.toggle('hide',!series);$('makeSeries').classList.toggle('primary',series);refresh()};for(const id of ['mw','mh','cols','gx','gy','ref','anchor','gapAnchor','level','shift','distribution','dims'])$(id).addEventListener('input',refresh);$('dims').addEventListener('change',()=>{setDimPanel();draw()});$('dimAll').onclick=()=>{works.forEach(w=>selectedDims.add(w.id));refreshDimChoices();draw()};$('dimNone').onclick=()=>{selectedDims.clear();refreshDimChoices();draw()};$('pointsAll').onclick=()=>{works.forEach(w=>selectedPoints.delete(w.id));refreshPointChoices();draw()};$('pointsNone').onclick=()=>{works.forEach(w=>selectedPoints.set(w.id,new Set()));refreshPointChoices();draw()};for(const id of ['dimHeight','dimEdge','dimGap','dimWorkGap'])$(id).addEventListener('change',draw);
+$('download').onclick=()=>{const svg=$('drawing').cloneNode(true);svg.setAttribute('xmlns',ns);const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml'}));const a=document.createElement('a');a.href=url;a.download='ridfou-plan.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)};
+function showPhoto(){const img=$('photo');img.style.display=photoUrl?'block':'none';$('photoTools').classList.toggle('hide',!photoUrl);img.style.opacity=String(val('opacity')/100);img.style.transform=`rotate(${angle}deg)`}
+$('photoFile').addEventListener('change',e=>{const file=e.target.files?.[0];if(!file)return;if(!file.type.startsWith('image/')){$('photoStatus').textContent='Le fichier sélectionné n’est pas une image.';return}if(photoUrl)URL.revokeObjectURL(photoUrl);photoUrl=URL.createObjectURL(file);angle=0;$('photo').onload=()=>{$('photoStatus').textContent='Photo chargée : '+file.name;showPhoto()};$('photo').onerror=()=>{$('photoStatus').textContent='Impossible de lire cette photo. Essaie une image JPG ou PNG.'};$('photo').src=photoUrl;showPhoto()});$('opacity').oninput=showPhoto;$('rotate').onclick=()=>{angle=(angle+90)%360;showPhoto()};$('removePhoto').onclick=()=>{if(photoUrl)URL.revokeObjectURL(photoUrl);photoUrl=null;$('photo').removeAttribute('src');$('photoFile').value='';$('photoStatus').textContent='Aucune photo sélectionnée.';showPhoto()};renderWorks();setDimPanel();refresh();$('planZoom').addEventListener('click',()=>{planZoomed=!planZoomed;const sheet=document.querySelector('.plan-preview-sheet');sheet.classList.toggle('is-zoomed',planZoomed);$('planZoom').setAttribute('aria-pressed',String(planZoomed));$('planZoom').textContent=planZoomed?'Adapter à l’écran ↙':'Agrandir le plan ⤢';});
+
+function updatePlacementOptions(){const mode=$('distribution').value;$('marginControls').classList.toggle('hide',mode!=='margins');$('freeHelp').classList.toggle('hide',mode!=='free');}
+function applyPlanLock(){const ids=['mw','mh','cols','gx','gy','ref','anchor','gapAnchor','level','shift','distribution','marginLeft','marginRight','addWork','makeSeries'];for(const id of ids)$(id).disabled=planLocked;document.querySelectorAll('#secOeuvres .work [data-k],#secOeuvres .work .remove').forEach(e=>e.disabled=planLocked||(e.classList.contains('remove')&&works.length===1));document.querySelectorAll('[data-plan-align]').forEach(b=>b.disabled=planLocked);$('togglePlanLock').textContent=planLocked?'🔒 Déverrouiller le plan':'🔓 Verrouiller le plan';$('planLockHint').textContent=planLocked?'Plan verrouillé pour le chantier : mesures et placement protégés.':'Plan modifiable.';}
+$('togglePlanLock').onclick=()=>{planLocked=!planLocked;applyPlanLock();draw()};
+$('printPlan').onclick=()=>window.print();
+$('formulasShow').onclick=()=>document.querySelectorAll('#formulaLibrary details').forEach(d=>d.open=true);
+$('formulasHide').onclick=()=>document.querySelectorAll('#formulaLibrary details').forEach(d=>d.open=false);
+$('drawing').addEventListener('pointerdown',event=>{if(planLocked||$('distribution').value!=='free'||!drawingGeometry)return;const target=event.target.closest('[data-draggable-work]');if(!target||!target.dataset.draggableWork)return;const id=Number(target.dataset.draggableWork),d=layout(),t=d.items.find(z=>z.a.id===id);if(!t)return;const rect=$('drawing').getBoundingClientRect(),view=$('drawing').viewBox.baseVal;const ux=(event.clientX-rect.left)*view.width/rect.width,uy=(event.clientY-rect.top)*view.height/rect.height;const x=(ux-drawingGeometry.originX)/drawingGeometry.sc,y=(drawingGeometry.originY-uy)/drawingGeometry.sc;dragging={id,dx:x-t.x,dy:y-t.y};$('drawing').setPointerCapture(event.pointerId);event.preventDefault()});
+$('drawing').addEventListener('pointermove',event=>{if(!dragging||!drawingGeometry)return;const rect=$('drawing').getBoundingClientRect(),view=$('drawing').viewBox.baseVal;const ux=(event.clientX-rect.left)*view.width/rect.width,uy=(event.clientY-rect.top)*view.height/rect.height;const d=layout(),t=d.items.find(z=>z.a.id===dragging.id);if(!t)return;const x=(ux-drawingGeometry.originX)/drawingGeometry.sc-dragging.dx,y=(drawingGeometry.originY-uy)/drawingGeometry.sc-dragging.dy;freePositions.set(dragging.id,{x:Math.max(0,Math.min(d.W-t.w,x)),y:Math.max(0,Math.min(d.H-t.h,y))});draw();event.preventDefault()});
+$('drawing').addEventListener('pointerup',()=>dragging=null);
+$('drawing').addEventListener('pointercancel',()=>dragging=null);
+$('drawing').addEventListener('lostpointercapture',()=>dragging=null);
+for(const id of ['marginLeft','marginRight'])$(id).addEventListener('input',refresh);
+$('distribution').addEventListener('change',()=>{updatePlacementOptions();refreshPlanAlignmentControls();refresh()});
+
+function refreshPlanAlignmentControls(){
+ document.querySelectorAll('[data-plan-align]').forEach(button=>{
+  const chosen=button.dataset.planAlign===planAlignment;
+  button.classList.toggle('selected',chosen);
+  button.setAttribute('aria-pressed',String(chosen));
+ });
+ const help={center:'La ligne pointillée passe par le milieu des œuvres.',top:'La ligne pointillée suit le bord supérieur des œuvres.',bottom:'La ligne pointillée suit le bord inférieur des œuvres.'};
+ $('planAlignHint').textContent=help[planAlignment]+($('distribution').value==='free'?' En mode libre, tu peux encore déplacer les œuvres après leur alignement.':'');
+}
+function selectPlanAlignment(mode){
+ if(planLocked||!['center','top','bottom'].includes(mode))return;
+ // Le mode libre doit conserver les abscisses actuelles et réellement réaligner les cadres.
+ if($('distribution').value==='free'){
+  const current=layout();
+  for(let r=0;r<current.rows;r++){
+   const row=current.items.filter(t=>t.r===r&&t.h>0);
+   if(!row.length)continue;
+   const reference=row[0];
+   const target=reference.y+(mode==='top'?reference.h:mode==='bottom'?0:reference.h/2);
+   for(const t of row){
+    const p=freePositions.get(t.a.id)||{x:t.x,y:t.y};
+    const offset=mode==='top'?t.h:mode==='bottom'?0:t.h/2;
+    freePositions.set(t.a.id,{x:p.x,y:target-offset});
+   }
+  }
+ }
+ planAlignment=mode;
+ refreshPlanAlignmentControls();
+ draw();
+}
+document.querySelectorAll('[data-plan-align]').forEach(button=>{
+ button.addEventListener('click',()=>selectPlanAlignment(button.dataset.planAlign));
+});
+refreshPlanAlignmentControls();
+
+updatePlacementOptions();applyPlanLock();
+</script><script id="bottomTabScript">(function(){
+ const screens=['mur','oeuvres','attaches','percage','calculs'];
+ const tabs=document.querySelectorAll('#appTabs .bottom-tab');
+ function show(view,scroll){
+  if(!screens.includes(view))return;
+  document.body.dataset.view=view;
+  tabs.forEach(button=>button.setAttribute('aria-current',button.dataset.view===view?'page':'false'));
+  document.getElementById('worksHeading').textContent=view==='attaches'?'Attaches des œuvres':'3. Œuvres';
+  if(view==='calculs')document.querySelector('#secCalculs > details').open=true;
+  if(scroll)window.scrollTo(0,0);
+ }
+ document.getElementById('appTabs').addEventListener('click',event=>{
+  const button=event.target.closest('button[data-view]');if(button)show(button.dataset.view,true);
+ });
+ show('mur',false);
+})();</script></body></html>
