@@ -1,6 +1,8 @@
 /* PWA offline cache — scoped to the same GitHub Pages repository. */
-const CACHE='ridfou-accroche-v8-20261114';
+const CACHE='ridfou-accroche-v9-20261115';
 const APP=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-180.png'];
+/* Lecteur PDF : mis en cache à part, sans bloquer l'installation de l'appli. */
+const OPT=['./pdf.min.js','./pdf.worker.min.js'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(APP)).then(()=>self.skipWaiting()));
 });
@@ -8,7 +10,7 @@ self.addEventListener('activate',event=>{
  event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('ridfou-accroche-')&&key!==CACHE).map(key=>caches.delete(key)))),self.clients.claim()]));
 });
 self.addEventListener('message',event=>{
- if(event.data?.type==='CACHE_APP')event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(APP)).catch(()=>{}));
+ if(event.data?.type==='CACHE_APP')event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(APP).then(()=>Promise.allSettled(OPT.map(u=>cache.match(u).then(hit=>hit||cache.add(u)))))).catch(()=>{}));
 });
 self.addEventListener('fetch',event=>{
  const req=event.request;

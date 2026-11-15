@@ -525,7 +525,45 @@ body[data-view="attaches"] .attach-from{display:block}
 .pos-row input{width:100%;min-height:44px}
 #posHint{color:var(--warn);font-size:12.5px;margin:6px 0 0}
 @media print{.attach-from,#secPositions{display:none!important}}
-</style></head><body data-view="mur"><header class="appbar"><div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 11 12 4.6 17.5 11"/><circle cx="12" cy="4.1" r="1.25" fill="currentColor"/><rect x="4" y="11" width="16" height="9" rx="2"/></svg></span><div class="brand-text"><span class="brand-kicker">Ridfou Art</span><h1>Accroche Pro</h1></div></div><div id="appStatus" class="app-status" role="status"></div></header><main><div class="pagehead" id="pageHead"><div class="pg-steps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="pg-kicker" id="pageKicker">Étape 1 sur 5</div><h2 id="pageTitle">Ton mur</h2><p id="pageLead">Indique les dimensions du mur où tu vas accrocher.</p></div><div><section class="card app-screen" id="secMur" data-screens="mur"><h2>Mur</h2><div class="wall-fig" aria-hidden="true"><svg id="wallMini" viewBox="0 0 248 124"></svg></div><div class="grid"><div><label for="mw">Largeur</label><div class="unit"><input id="mw" type="number" min="1" placeholder="ex. 400" inputmode="decimal"><span>cm</span></div></div><div><label for="mh">Hauteur</label><div class="unit"><input id="mh" type="number" min="1" placeholder="ex. 250" inputmode="decimal"><span>cm</span></div></div></div></section><section class="card app-screen project-storage" id="secProjects" data-screens="mur"><details><summary><span class="sum-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></span><span class="sum-main"><b>Mes projets</b></span></summary><div class="pj-body"><p class="muted storage-description">Sauvegarde automatique sur cet appareil, y compris les photos. Vous pouvez aussi conserver plusieurs projets et exporter une copie de sécurité.</p><div class="save-row"><input id="projectSaveName" type="text" maxlength="90" placeholder="Nom du projet (ex. Bibliothèque)" aria-label="Nom du projet à enregistrer"><button id="projectSaveCopy" type="button">Enregistrer ce projet</button></div><div class="project-actions"><button id="projectNew" type="button">Nouveau projet</button><button id="projectExport" type="button">Exporter une sauvegarde</button><label for="projectImportFile" class="btn-like pj-import">Importer une sauvegarde</label><input id="projectImportFile" type="file" accept="application/json,.json" hidden></div><div id="projectSavedList" class="saved-list"></div><p class="muted">Les données restent sur ce navigateur. Les sauvegardes exportées contiennent aussi les photos éventuelles.</p><p id="offlineAvailabilityStatus" class="storage-status" role="status">Hors connexion : installation après la première ouverture du site en ligne.</p></div></details><p id="projectSaveStatus" class="storage-status" role="status">Vérification du stockage local…</p></section><section class="card app-screen" id="secCroquis" data-screens="mur"><div class="card-head"><h2>Photo de ton croquis</h2><span class="tag">Facultatif</span></div><p class="muted">Garde ton croquis sous les yeux pour reproduire ton accrochage.</p><div class="row"><label for="photoFile" class="btn-like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.4"/></svg>Choisir ou prendre une photo</label></div><input id="photoFile" type="file" accept="image/*" hidden><p id="photoStatus" class="muted">Aucune photo sélectionnée.</p><img id="photo" alt="Ton croquis"><div id="photoTools" class="hide"><div class="grid"><div><label>Opacité</label><input id="opacity" type="range" min="10" max="100" value="100"></div><div><label>Rotation</label><button type="button" id="rotate">Tourner de 90°</button></div></div><div class="row" style="margin-top:8px"><button type="button" id="removePhoto">Supprimer la photo</button></div></div></section><section class="card app-screen" id="secOeuvres" data-screens="oeuvres attaches"><h2 id="worksHeading">Œuvres</h2><div class="attach-guide" id="attachGuide"><svg id="agSvgTop" viewBox="0 0 150 120" role="img" aria-label="Schéma : distance du haut et distance du bord"><rect x="18" y="14" width="114" height="92" rx="3" fill="#f6f7fa" stroke="#8e99ad" stroke-width="2"/><g stroke="#2457d6" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M38 38H66" stroke-dasharray="3 3"/><path d="M62 14v24M57 14h10M57 38h10"/><path d="M38 38V64" stroke-dasharray="3 3"/><path d="M18 64h20M18 59v10M38 59v10"/></g><circle cx="38" cy="38" r="5.5" fill="#2457d6"/><circle cx="112" cy="38" r="5.5" fill="#2457d6"/><circle cx="76" cy="26" r="7.5" fill="#2457d6"/><text x="76" y="29.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">1</text><circle cx="28" cy="82" r="7.5" fill="#2457d6"/><text x="28" y="85.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">2</text></svg><svg id="agSvgBottom" class="hide" viewBox="0 0 150 120" role="img" aria-label="Schéma : distance depuis le bas jusqu’à l’attache, et distance du bord"><rect x="18" y="14" width="114" height="92" rx="3" fill="#f6f7fa" stroke="#8e99ad" stroke-width="2"/><g stroke="#2457d6" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M38 38H66" stroke-dasharray="3 3"/><path d="M62 106V38M57 106h10M57 38h10"/><path d="M38 38V64" stroke-dasharray="3 3"/><path d="M18 64h20M18 59v10M38 59v10"/></g><circle cx="38" cy="38" r="5.5" fill="#2457d6"/><circle cx="112" cy="38" r="5.5" fill="#2457d6"/><circle cx="76" cy="72" r="7.5" fill="#2457d6"/><text x="76" y="75.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">1</text><circle cx="28" cy="82" r="7.5" fill="#2457d6"/><text x="28" y="85.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">2</text></svg><div><p id="agP1"><span class="n">1</span><b>Du haut</b> : du bord haut de l’œuvre jusqu’à l’attache.</p><p><span class="n">2</span><b>Du bord</b> : du côté de l’œuvre jusqu’à l’attache.</p></div></div><div class="attach-from" id="attachFromRow"><label for="attachFrom">Mesurer la hauteur de l’attache</label><select id="attachFrom"><option value="top">Depuis le haut de l’œuvre</option><option value="bottom">Depuis le bas de l’œuvre</option></select><small>Avec 4 points ou plus, et pour le rail, la mesure reste prise depuis le haut.</small></div><div id="works"></div><div class="row works-actions"><button type="button" id="addWork" class="primary">+ Ajouter une œuvre</button><button type="button" id="makeSeries">Créer une série</button></div><div id="seriesOptions" class="hide"><h3 style="font-size:14px">Disposition en grille</h3><div class="grid"><div><label>Colonnes</label><input id="cols" type="number" min="1" value="2"></div><div><label>Écart horiz. (cm)</label><input id="gx" type="number" min="0" value="15"></div><div><label>Écart vert. (cm)</label><input id="gy" type="number" min="0" value="10"></div></div><p class="muted">Les œuvres sont disposées dans l'ordre de la liste, de gauche à droite puis de haut en bas.</p></div></section><section class="card app-screen hide" id="secRail" data-screens="attaches"><h2>Rail — tasseaux emboîtés</h2><p class="muted">Un tasseau est fixé derrière l’œuvre, un second au mur : l’œuvre se pose dessus. Ces réglages sont communs à toutes les œuvres sur rail.</p><div class="grid"><div><label for="cleatH">Hauteur du tasseau (cm)</label><input id="cleatH" type="number" min="0.5" max="50" step="0.1" value="5" inputmode="decimal"></div><div><label for="cleatEnd">Vis à … du bout (cm)</label><input id="cleatEnd" type="number" min="0" max="100" step="0.1" value="5" inputmode="decimal"></div><div><label for="cleatGap">Écart maxi entre vis (cm)</label><input id="cleatGap" type="number" min="5" max="300" step="1" value="40" inputmode="decimal"></div></div><div class="cleat-d"><label for="cleatD">Emboîtement (cm)</label><input id="cleatD" type="number" min="-50" max="100" step="0.1" placeholder="À mesurer" inputmode="decimal"></div><p class="muted cleat-help">De combien le haut du tasseau mural est plus bas que celui de l’œuvre une fois posée. À mesurer une seule fois : pose un tasseau sur l’autre et relève l’écart entre leurs bords hauts. Tant qu’il manque, les positions horizontales sont calculées mais pas les hauteurs.</p><div id="railSummary"></div></section><section class="card app-screen" id="secHauteur" data-screens="percage"><h2>Hauteur d'accrochage</h2><div class="height-fields"><div><label for="level">Hauteur depuis le sol</label><div class="unit"><input id="level" type="number" placeholder="ex. 150" inputmode="decimal"><span>cm</span></div></div><div><label for="ref">Cette hauteur correspond à…</label><select id="ref"><option value="center">Centre de l'œuvre / rangée</option><option value="bottom">Bas de l'ensemble</option><option value="top">Haut de l'ensemble</option><option value="gap">Milieu de l'espace entre deux rangées</option></select></div><div id="rowChoice" class="hide"><label for="anchor">Rangée dont le centre est fixé</label><select id="anchor"></select></div><div id="gapChoice" class="hide"><label for="gapAnchor">Espace entre les rangées</label><select id="gapAnchor"></select></div></div><p class="muted hint-height">Le plan juste en dessous se met à jour à chaque changement.</p></section></div>
+/* ===== Import liste / PDF ===== */
+.imp-link{width:100%;min-height:44px;background:var(--surface);border:1px dashed var(--line-2);color:var(--accent-ink);font-weight:650;border-radius:var(--r-md);padding:10px 14px}
+#secMur .imp-link{margin-top:14px}
+.imp-row{margin:-4px 0 14px}
+body[data-view="attaches"] .imp-row{display:none}
+body.imp-open{overflow:hidden}
+.imp-back{position:fixed;inset:0;z-index:3000;background:rgba(20,26,38,.5);display:flex;align-items:flex-end;justify-content:center}
+.imp-back.hide{display:none!important}
+.imp-panel{background:var(--surface);width:100%;max-width:720px;max-height:94vh;max-height:94dvh;border-radius:20px 20px 0 0;display:flex;flex-direction:column;box-shadow:0 -8px 30px rgba(20,26,38,.2)}
+@media(min-width:760px){.imp-back{align-items:center}.imp-panel{border-radius:20px;max-height:88vh}}
+.imp-head{display:flex;justify-content:space-between;align-items:center;padding:14px 8px 4px 18px}
+.imp-head h2{margin:0;font-size:19px}
+.imp-x{width:44px;height:44px;border:0;background:transparent;color:var(--ink-2);display:grid;place-items:center;border-radius:12px;padding:0}
+.imp-body{padding:6px 18px 14px;overflow:auto;-webkit-overflow-scrolling:touch;display:grid;gap:14px;overscroll-behavior:contain}
+.imp-body label{display:block;font-size:13px;font-weight:650;color:var(--ink-2);margin:0 0 6px}
+.imp-source button{width:100%;min-height:48px}
+.imp-status{margin:-4px 0 0;font-size:13px;color:var(--ink-2);line-height:1.45}
+.imp-status:empty{display:none}
+.imp-status.imp-err{color:var(--danger)}
+#impText{width:100%;min-height:120px;font:13.5px/1.45 ui-monospace,SFMono-Regular,Menlo,monospace;padding:10px 12px;border:1px solid var(--line-2);border-radius:var(--r-md);resize:vertical;background:#fff;color:var(--ink)}
+.imp-opts{display:grid;grid-template-columns:1fr;gap:12px}
+.imp-details summary{min-height:44px;display:flex;align-items:center;font-size:13px;font-weight:650;color:var(--ink-2);cursor:pointer}
+.imp-details[open] summary{margin-bottom:4px}
+.imp-details summary{list-style:none}.imp-details summary::-webkit-details-marker{display:none}
+.imp-details summary::after{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin:-3px 0 0 10px;opacity:.55}
+.imp-details[open] summary::after{transform:rotate(-135deg);margin-top:4px}
+.imp-opts select,.imp-walls select{width:100%;min-height:44px}
+.imp-sub{font-size:13px;font-weight:650;color:var(--ink-2);margin:0 0 8px}
+.imp-item{display:grid;grid-template-columns:44px 1fr 1fr;gap:8px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.imp-item .imp-chk{grid-row:1/3;display:grid;place-items:center;margin:0;min-height:44px}
+.imp-item .imp-chk input{width:22px;height:22px;margin:0}
+.imp-item .imp-n{grid-column:2/4}
+.imp-item input[type=text],.imp-item input[type=number]{min-height:44px;width:100%;min-width:0}
+.imp-foot{display:flex;gap:10px;padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.imp-foot button{flex:1;min-height:48px}
+.imp-foot #impGo{flex:2}
+.imp-foot button:disabled{opacity:.45}
+@media print{.imp-back,.imp-row,.imp-link{display:none!important}}
+</style></head><body data-view="mur"><header class="appbar"><div class="brand"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 11 12 4.6 17.5 11"/><circle cx="12" cy="4.1" r="1.25" fill="currentColor"/><rect x="4" y="11" width="16" height="9" rx="2"/></svg></span><div class="brand-text"><span class="brand-kicker">Ridfou Art</span><h1>Accroche Pro</h1></div></div><div id="appStatus" class="app-status" role="status"></div></header><main><div class="pagehead" id="pageHead"><div class="pg-steps" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div><div class="pg-kicker" id="pageKicker">Étape 1 sur 5</div><h2 id="pageTitle">Ton mur</h2><p id="pageLead">Indique les dimensions du mur où tu vas accrocher.</p></div><div><section class="card app-screen" id="secMur" data-screens="mur"><h2>Mur</h2><div class="wall-fig" aria-hidden="true"><svg id="wallMini" viewBox="0 0 248 124"></svg></div><div class="grid"><div><label for="mw">Largeur</label><div class="unit"><input id="mw" type="number" min="1" placeholder="ex. 400" inputmode="decimal"><span>cm</span></div></div><div><label for="mh">Hauteur</label><div class="unit"><input id="mh" type="number" min="1" placeholder="ex. 250" inputmode="decimal"><span>cm</span></div></div></div><button type="button" id="impOpenMur" class="imp-link">Importer depuis un PDF ou une liste</button></section><section class="card app-screen project-storage" id="secProjects" data-screens="mur"><details><summary><span class="sum-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2.5h8a2 2 0 0 1 2 2V17a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg></span><span class="sum-main"><b>Mes projets</b></span></summary><div class="pj-body"><p class="muted storage-description">Sauvegarde automatique sur cet appareil, y compris les photos. Vous pouvez aussi conserver plusieurs projets et exporter une copie de sécurité.</p><div class="save-row"><input id="projectSaveName" type="text" maxlength="90" placeholder="Nom du projet (ex. Bibliothèque)" aria-label="Nom du projet à enregistrer"><button id="projectSaveCopy" type="button">Enregistrer ce projet</button></div><div class="project-actions"><button id="projectNew" type="button">Nouveau projet</button><button id="projectExport" type="button">Exporter une sauvegarde</button><label for="projectImportFile" class="btn-like pj-import">Importer une sauvegarde</label><input id="projectImportFile" type="file" accept="application/json,.json" hidden></div><div id="projectSavedList" class="saved-list"></div><p class="muted">Les données restent sur ce navigateur. Les sauvegardes exportées contiennent aussi les photos éventuelles.</p><p id="offlineAvailabilityStatus" class="storage-status" role="status">Hors connexion : installation après la première ouverture du site en ligne.</p></div></details><p id="projectSaveStatus" class="storage-status" role="status">Vérification du stockage local…</p></section><section class="card app-screen" id="secCroquis" data-screens="mur"><div class="card-head"><h2>Photo de ton croquis</h2><span class="tag">Facultatif</span></div><p class="muted">Garde ton croquis sous les yeux pour reproduire ton accrochage.</p><div class="row"><label for="photoFile" class="btn-like"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.4"/></svg>Choisir ou prendre une photo</label></div><input id="photoFile" type="file" accept="image/*" hidden><p id="photoStatus" class="muted">Aucune photo sélectionnée.</p><img id="photo" alt="Ton croquis"><div id="photoTools" class="hide"><div class="grid"><div><label>Opacité</label><input id="opacity" type="range" min="10" max="100" value="100"></div><div><label>Rotation</label><button type="button" id="rotate">Tourner de 90°</button></div></div><div class="row" style="margin-top:8px"><button type="button" id="removePhoto">Supprimer la photo</button></div></div></section><section class="card app-screen" id="secOeuvres" data-screens="oeuvres attaches"><h2 id="worksHeading">Œuvres</h2><div class="attach-guide" id="attachGuide"><svg id="agSvgTop" viewBox="0 0 150 120" role="img" aria-label="Schéma : distance du haut et distance du bord"><rect x="18" y="14" width="114" height="92" rx="3" fill="#f6f7fa" stroke="#8e99ad" stroke-width="2"/><g stroke="#2457d6" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M38 38H66" stroke-dasharray="3 3"/><path d="M62 14v24M57 14h10M57 38h10"/><path d="M38 38V64" stroke-dasharray="3 3"/><path d="M18 64h20M18 59v10M38 59v10"/></g><circle cx="38" cy="38" r="5.5" fill="#2457d6"/><circle cx="112" cy="38" r="5.5" fill="#2457d6"/><circle cx="76" cy="26" r="7.5" fill="#2457d6"/><text x="76" y="29.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">1</text><circle cx="28" cy="82" r="7.5" fill="#2457d6"/><text x="28" y="85.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">2</text></svg><svg id="agSvgBottom" class="hide" viewBox="0 0 150 120" role="img" aria-label="Schéma : distance depuis le bas jusqu’à l’attache, et distance du bord"><rect x="18" y="14" width="114" height="92" rx="3" fill="#f6f7fa" stroke="#8e99ad" stroke-width="2"/><g stroke="#2457d6" stroke-width="1.6" stroke-linecap="round" fill="none"><path d="M38 38H66" stroke-dasharray="3 3"/><path d="M62 106V38M57 106h10M57 38h10"/><path d="M38 38V64" stroke-dasharray="3 3"/><path d="M18 64h20M18 59v10M38 59v10"/></g><circle cx="38" cy="38" r="5.5" fill="#2457d6"/><circle cx="112" cy="38" r="5.5" fill="#2457d6"/><circle cx="76" cy="72" r="7.5" fill="#2457d6"/><text x="76" y="75.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">1</text><circle cx="28" cy="82" r="7.5" fill="#2457d6"/><text x="28" y="85.5" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">2</text></svg><div><p id="agP1"><span class="n">1</span><b>Du haut</b> : du bord haut de l’œuvre jusqu’à l’attache.</p><p><span class="n">2</span><b>Du bord</b> : du côté de l’œuvre jusqu’à l’attache.</p></div></div><div class="attach-from" id="attachFromRow"><label for="attachFrom">Mesurer la hauteur de l’attache</label><select id="attachFrom"><option value="top">Depuis le haut de l’œuvre</option><option value="bottom">Depuis le bas de l’œuvre</option></select><small>Avec 4 points ou plus, et pour le rail, la mesure reste prise depuis le haut.</small></div><div id="works"></div><div class="row works-actions"><button type="button" id="addWork" class="primary">+ Ajouter une œuvre</button><button type="button" id="makeSeries">Créer une série</button></div><div class="imp-row"><button type="button" id="impOpen" class="imp-link">Importer une liste ou un PDF</button></div><div id="seriesOptions" class="hide"><h3 style="font-size:14px">Disposition en grille</h3><div class="grid"><div><label>Colonnes</label><input id="cols" type="number" min="1" value="2"></div><div><label>Écart horiz. (cm)</label><input id="gx" type="number" min="0" value="15"></div><div><label>Écart vert. (cm)</label><input id="gy" type="number" min="0" value="10"></div></div><p class="muted">Les œuvres sont disposées dans l'ordre de la liste, de gauche à droite puis de haut en bas.</p></div></section><section class="card app-screen hide" id="secRail" data-screens="attaches"><h2>Rail — tasseaux emboîtés</h2><p class="muted">Un tasseau est fixé derrière l’œuvre, un second au mur : l’œuvre se pose dessus. Ces réglages sont communs à toutes les œuvres sur rail.</p><div class="grid"><div><label for="cleatH">Hauteur du tasseau (cm)</label><input id="cleatH" type="number" min="0.5" max="50" step="0.1" value="5" inputmode="decimal"></div><div><label for="cleatEnd">Vis à … du bout (cm)</label><input id="cleatEnd" type="number" min="0" max="100" step="0.1" value="5" inputmode="decimal"></div><div><label for="cleatGap">Écart maxi entre vis (cm)</label><input id="cleatGap" type="number" min="5" max="300" step="1" value="40" inputmode="decimal"></div></div><div class="cleat-d"><label for="cleatD">Emboîtement (cm)</label><input id="cleatD" type="number" min="-50" max="100" step="0.1" placeholder="À mesurer" inputmode="decimal"></div><p class="muted cleat-help">De combien le haut du tasseau mural est plus bas que celui de l’œuvre une fois posée. À mesurer une seule fois : pose un tasseau sur l’autre et relève l’écart entre leurs bords hauts. Tant qu’il manque, les positions horizontales sont calculées mais pas les hauteurs.</p><div id="railSummary"></div></section><section class="card app-screen" id="secHauteur" data-screens="percage"><h2>Hauteur d'accrochage</h2><div class="height-fields"><div><label for="level">Hauteur depuis le sol</label><div class="unit"><input id="level" type="number" placeholder="ex. 150" inputmode="decimal"><span>cm</span></div></div><div><label for="ref">Cette hauteur correspond à…</label><select id="ref"><option value="center">Centre de l'œuvre / rangée</option><option value="bottom">Bas de l'ensemble</option><option value="top">Haut de l'ensemble</option><option value="gap">Milieu de l'espace entre deux rangées</option></select></div><div id="rowChoice" class="hide"><label for="anchor">Rangée dont le centre est fixé</label><select id="anchor"></select></div><div id="gapChoice" class="hide"><label for="gapAnchor">Espace entre les rangées</label><select id="gapAnchor"></select></div></div><p class="muted hint-height">Le plan juste en dessous se met à jour à chaque changement.</p></section></div>
 <div class="output">
 <section class="card app-screen" id="secPercage" data-screens="percage"><h2>Plan d'accrochage</h2><div class="plan-head"><label class="switch-row" for="dims"><span>Afficher les cotes</span><input id="dims" type="checkbox" checked></label><details class="dim-settings"><summary>Régler les cotes</summary><div id="dimOptions" style="display:none;width:100%;margin-top:10px;padding:12px;border:1px solid #cbd5e1;border-radius:10px;background:#f8fafc"><div style="font-weight:700;margin-bottom:8px">Cotes des œuvres</div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px"><button type="button" id="dimAll">Toutes</button><button type="button" id="dimNone">Aucune</button><span id="dimWorks" style="display:flex;flex-wrap:wrap;gap:9px;align-items:center"></span></div><div style="font-weight:700;margin-bottom:7px">Sélectionner les points</div><div class="row" style="margin-bottom:8px"><button type="button" id="pointsAll">Tous les points</button><button type="button" id="pointsNone">Aucun point</button></div><div id="dimPoints" style="display:grid;gap:8px;margin-bottom:12px"></div><div class="hide" aria-hidden="true"><div style="display:flex;flex-wrap:wrap;gap:12px"><label style="font-size:13px;color:#c46a08"><input type="checkbox" id="dimHeight" checked> Hauteurs depuis le sol</label><label style="font-size:13px;color:#15803d"><input type="checkbox" id="dimEdge" checked> Mur → points sélectionnés</label><label style="font-size:13px;color:#2563eb"><input type="checkbox" id="dimGap" checked> Entraxes successifs</label><label style="font-size:13px;color:#9333ea"><input type="checkbox" id="dimWorkGap" checked> Espacements entre les œuvres</label></div></div><p style="font-size:12px;color:#475569;margin:8px 0 0">Les œuvres restent visibles. Seules les cotes sélectionnées sont affichées.</p></div></details></div><section class="plan-preview-sheet" aria-label="Plan interactif et ses légendes"><div class="plan-preview-header"><div class="plan-preview-title" id="planVisualTitle">PLAN D’ACCROCHAGE</div><div class="plan-preview-subtitle" id="planVisualSubtitle">Dimensions et alignement de la composition</div></div><div class="plan-zoom-toolbar"><button type="button" id="planZoom" aria-pressed="false">Agrandir le plan ⤢</button><span id="planHint">Plan interactif : les cotes évoluent avec les œuvres</span></div><div class="plan"><svg id="drawing" viewBox="0 0 820 580" aria-label="Plan d'accrochage interactif"></svg></div><h3 class="plan-legend-title">Lecture des cotes</h3><div id="planLegend" class="plan-legend"></div><div class="plan-legend-footer"><span id="planLegendNote" class="muted"></span><span class="muted">Clique sur une légende pour afficher ou masquer les cotes correspondantes.</span></div></section><p id="warnings" class="warn"></p></section><details class="card app-screen" id="secDispo" data-screens="percage"><summary><span class="sum-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h9M17 7h3M4 17h3M11 17h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></svg></span><span class="sum-main"><b>Disposition</b><small id="dispoSummary"></small></span></summary><div class="dispo-body"><div id="planAlignment" class="plan-alignment" role="group" aria-label="Alignement des œuvres sur le plan"><div class="plan-alignment-title">Aligner les œuvres</div><div class="plan-alignment-options"><button type="button" data-plan-align="center" aria-pressed="true" class="selected">Centres</button><button type="button" data-plan-align="top" aria-pressed="false">Hauts</button><button type="button" data-plan-align="bottom" aria-pressed="false">Bas</button></div><p id="planAlignHint" class="plan-alignment-hint">La ligne pointillée passe par le milieu des œuvres.</p></div><div class="plan-quick-controls" aria-label="Disposition rapide">
 <div class="compact-control-title">Répartition horizontale</div>
@@ -543,7 +581,7 @@ body[data-view="attaches"] .attach-from{display:block}
 <div class="offset-row"><label for="shift">Décalage (cm)</label><div class="offset-stepper"><button type="button" id="shiftMinus" aria-label="Diminuer le décalage">−</button><input id="shift" type="number" step="1" value="0" aria-label="Décalage horizontal en centimètres"/><button type="button" id="shiftPlus" aria-label="Augmenter le décalage">+</button></div></div>
 </div><div class="plan-tools"><button id="togglePlanLock" type="button">🔓 Verrouiller le plan</button><span class="plan-lock-msg" id="planLockHint">Plan modifiable.</span></div></div></details><section class="card app-screen hide" id="secPositions" data-screens="percage"><h2>Positions des œuvres</h2><p class="muted" id="posHelp">Mode libre : saisis la place de chaque œuvre, ou déplace-la directement sur le plan. Les deux se mettent à jour.</p><div class="pos-ref"><label for="posRef">Mesure verticale de l’œuvre</label><select id="posRef"><option value="wallTop">Haut, du haut du mur</option><option value="floorTop">Haut, depuis le sol</option><option value="floorBottom">Bas, depuis le sol</option></select></div><div id="posList"></div></section><section class="card app-screen is-empty" id="secDrill" data-screens="percage"><div id="holeToHole"></div><div id="results"></div></section><section class="card app-screen" id="secExport" data-screens="percage"><h2>Exporter</h2><p class="muted" style="margin:0 0 12px">Un PDF à garder ou à envoyer : le plan et tous les points de perçage.</p><div class="export-row"><button id="printPlan" type="button" class="primary">Exporter en PDF</button><button id="download" type="button">Exporter le plan SVG</button></div></section><section class="card app-screen" id="secCalculs" data-screens="calculs"><div class="calc-top"><h2>Calculs</h2><div class="calc-seg" id="calcSeg" role="tablist" aria-label="Type de calcul"><button type="button" role="tab" data-calc="summary" aria-selected="true">Résumé</button><button type="button" role="tab" data-calc="formulas" aria-selected="false">Formules</button></div></div>
 <div id="calcSummary"></div>
-<div id="calcFormulas" class="hide"></div></section></div><div id="nextStepWrap" class="next-step-wrap hide"><button type="button" id="nextStep" class="primary"></button></div></main><nav id="appTabs" class="bottom-nav" aria-label="Navigation principale"><button type="button" class="bottom-tab" data-view="mur" aria-label="Mur" aria-current="page"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6"/></svg><span>Mur</span></button><button type="button" class="bottom-tab" data-view="oeuvres" aria-label="Œuvres" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m21 15-5-5L5 21"/></svg><span>Œuvres</span></button><button type="button" class="bottom-tab" data-view="attaches" aria-label="Attaches" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 21 4-9 5-3-6-6-3 5-9 4 9 9Z"/><path d="M12 8 8 12"/></svg><span>Attaches</span></button><button type="button" class="bottom-tab" data-view="percage" aria-label="Plan" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Plan</span></button><button type="button" class="bottom-tab" data-view="calculs" aria-label="Calculs" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8v3H8zM8 13h2m4 0h2m-8 4h2m4 0h2"/></svg><span>Calculs</span></button></nav><script>
+<div id="calcFormulas" class="hide"></div></section></div><div id="nextStepWrap" class="next-step-wrap hide"><button type="button" id="nextStep" class="primary"></button></div></main><nav id="appTabs" class="bottom-nav" aria-label="Navigation principale"><button type="button" class="bottom-tab" data-view="mur" aria-label="Mur" aria-current="page"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v6M15 9v6M9 15v6"/></svg><span>Mur</span></button><button type="button" class="bottom-tab" data-view="oeuvres" aria-label="Œuvres" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8" cy="8" r="1"/><path d="m21 15-5-5L5 21"/></svg><span>Œuvres</span></button><button type="button" class="bottom-tab" data-view="attaches" aria-label="Attaches" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 21 4-9 5-3-6-6-3 5-9 4 9 9Z"/><path d="M12 8 8 12"/></svg><span>Attaches</span></button><button type="button" class="bottom-tab" data-view="percage" aria-label="Plan" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg><span>Plan</span></button><button type="button" class="bottom-tab" data-view="calculs" aria-label="Calculs" aria-current="false"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M8 6h8v3H8zM8 13h2m4 0h2m-8 4h2m4 0h2"/></svg><span>Calculs</span></button></nav><div id="importSheet" class="imp-back hide" role="dialog" aria-modal="true" aria-labelledby="impTitle"><div class="imp-panel"><div class="imp-head"><h2 id="impTitle">Importer une liste</h2><button type="button" id="impClose" class="imp-x" aria-label="Fermer"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div><div class="imp-body"><p class="muted" style="margin:0">Choisis un PDF (liste des œuvres, plan du stand avec les murs) ou colle ta liste : une œuvre par ligne, avec ses dimensions.</p><div class="imp-source"><button type="button" id="impPdfBtn" class="primary">Choisir un PDF</button><input type="file" id="impPdfFile" accept="application/pdf,.pdf,text/plain,.txt,.csv" hidden></div><p id="impStatus" class="imp-status" role="status" aria-live="polite"></p><details id="impTextBox" class="imp-details" open><summary>Texte à lire — coller ou corriger</summary><textarea id="impText" rows="6" spellcheck="false" placeholder="Soleil levant — 65 x 95 cm&#10;Paysage 120 x 80&#10;Mur A : 360 x 250 cm" aria-label="Texte à lire"></textarea></details><div id="impWalls" class="imp-walls"></div><div id="impWorks"></div><div class="imp-opts"><div><label for="impOrder">Dimensions écrites</label><select id="impOrder"><option value="wh">largeur × hauteur</option><option value="hw">hauteur × largeur</option></select></div><div><label for="impMode">Les œuvres importées</label><select id="impMode"><option value="replace">remplacent les œuvres actuelles</option><option value="append">s’ajoutent aux œuvres actuelles</option></select></div></div></div><div class="imp-foot"><button type="button" id="impCancel">Annuler</button><button type="button" id="impGo" class="primary" disabled>Importer</button></div></div></div><script>
 'use strict';const $=id=>document.getElementById(id);const val=id=>$(id).value===''?NaN:Number($(id).value);const f=n=>Number.isFinite(n)?Number(n.toFixed(1)).toLocaleString('fr-FR'):'—';let works=[{id:1,name:'',w:'',h:'',points:'2',top:'',left:'',right:'',bottom:''}],nextId=2,series=false,photoUrl=null,angle=0;let planLocked=false, dragging=null;let planAlignment='center';let showDrillPoints=true;const freePositions=new Map();let drawingGeometry=null;const ns='http://www.w3.org/2000/svg';const selectedDims=new Set([1]);const selectedPoints=new Map();function pointEnabled(t,i){const ids=selectedPoints.get(t.a.id);return !ids||ids.has(i)}function refreshPointChoices(){const host=$('dimPoints');host.replaceChildren();works.forEach((w,i)=>{const row=document.createElement('div');row.style.cssText='display:flex;gap:12px;flex-wrap:wrap;align-items:center';const name=document.createElement('strong');name.textContent=workLabel(w,i);row.append(name);const n=w.points==='rail'?Math.max(1,(railPlan(w,Number(w.w))||{n:1}).n):Math.max(1,Number(w.points)||1);for(let j=0;j<n;j++){const label=document.createElement('label');label.style.cssText='display:inline-flex;gap:5px;align-items:center;font-size:13px';const cb=document.createElement('input');cb.type='checkbox';cb.checked=!selectedPoints.has(w.id)||selectedPoints.get(w.id).has(j);cb.onchange=()=>{if(!selectedPoints.has(w.id))selectedPoints.set(w.id,new Set(Array.from({length:n},(_,k)=>k)));if(cb.checked)selectedPoints.get(w.id).add(j);else selectedPoints.get(w.id).delete(j);draw()};label.append(cb,document.createTextNode('Trou '+(j+1)));row.append(label)}host.append(row)})}function refreshDimChoices(){const host=$('dimWorks');host.replaceChildren();works.forEach((w,i)=>{const label=document.createElement('label');label.style.cssText='display:inline-flex;align-items:center;gap:4px;font-size:13px';const cb=document.createElement('input');cb.type='checkbox';cb.checked=selectedDims.has(w.id);cb.addEventListener('change',()=>{if(cb.checked)selectedDims.add(w.id);else selectedDims.delete(w.id);draw()});label.append(cb,document.createTextNode(workLabel(w,i)));host.appendChild(label)});refreshPointChoices()}
 function workLabel(a,i){return String(a.name||'').trim()||'Œuvre '+(i+1)}
 function make(tag,attrs={},text=''){let e=document.createElementNS(ns,tag);Object.entries(attrs).forEach(([k,v])=>e.setAttribute(k,v));if(text)e.textContent=text;$('drawing').appendChild(e);return e}
@@ -982,6 +1020,252 @@ function renderCalculations(d,valid){
 
 function selectors(){const rows=Math.ceil(works.length/(series?Math.max(1,Math.floor(val('cols')||1)):works.length));const a=$('anchor').value||'1',g=$('gapAnchor').value||'1';$('anchor').innerHTML=Array.from({length:rows},(_,i)=>`<option value="${i+1}">Rangée ${i+1}</option>`).join('');$('gapAnchor').innerHTML=Array.from({length:Math.max(0,rows-1)},(_,i)=>`<option value="${i+1}">Entre ${i+1} et ${i+2}</option>`).join('');$('anchor').value=Number(a)<=rows?a:'1';$('gapAnchor').value=Number(g)<rows?g:'1';if(rows<2&&$('ref').value==='gap')$('ref').value='center';$('rowChoice').classList.toggle('hide',rows<2||$('ref').value!=='center');$('gapChoice').classList.toggle('hide',rows<2||$('ref').value!=='gap')}
 function refresh(){selectors();draw()}
+// ===== Import de liste (texte collé ou lu dans un PDF) =====
+const IMP_FILL="(?:(?:\\s+[A-Za-zÀ-ÿ'’]{1,12}){1,3}\\s*[:=]|\\s*[:=]?)";
+const IMP_NUM='\\d{1,4}(?:[.,]\\d{1,3})?';
+const IMP_UNIT='(?:cm|mm|m)(?![A-Za-zÀ-ÿ])';
+function impNum(s){return Number(String(s).replace(',','.'))}
+function impToCm(v,unit){unit=(unit||'').toLowerCase();return unit==='m'?v*100:unit==='mm'?v/10:v}
+function impClean(text){return String(text).replace(/[\u00a0\u2007\u202f\u2009]/g,' ').replace(/[\u2212\u2012\u2013\u2014]/g,'-').replace(/\r/g,'')}
+const IMP_PAIR=new RegExp('(^|[^\\d.,])('+IMP_NUM+')\\s*('+IMP_UNIT+')?(?:\\s*[x×✕✖*]\\s*|\\s+par\\s+)('+IMP_NUM+')\\s*('+IMP_UNIT+')?(?:\\s*[x×*]\\s*'+IMP_NUM+'\\s*(?:'+IMP_UNIT+')?)?','i');
+const IMP_LW=new RegExp('(^|[^A-Za-zÀ-ÿ])(?:larg(?:eur)?\\.?|width|l)'+IMP_FILL+'\\s*('+IMP_NUM+')\\s*('+IMP_UNIT+')?','i');
+const IMP_LH=new RegExp('(^|[^A-Za-zÀ-ÿ])(?:haut(?:eur)?\\.?|height|h)'+IMP_FILL+'\\s*('+IMP_NUM+')\\s*('+IMP_UNIT+')?','i');
+const IMP_WALL=/(^|[^A-Za-zÀ-ÿ])(mur|murs|cimaise|cimaises|paroi|cloison|wall)(?![A-Za-zÀ-ÿ])/i;
+function impName(s){
+ s=s.replace(/\|/g,' ').replace(/\t/g,' ').replace(/\s*\(\s*\)/g,' ');
+ s=s.replace(/^\s*(?:\d{1,3}\s*[.)\]:]\s+|\d{1,3}\s*-\s+|[-•·●▪◦*]\s*)/,'');
+ s=s.replace(/(^|\s)[x×*](?=\s|$)/gi,' ').replace(/\s+/g,' ').trim();
+ s=s.replace(/^[\s\-:;,.(\[]+|[\s\-:;,.(\[]+$/g,'').replace(/\s{2,}/g,' ');
+ s=s.replace(/^(?:dimensions?|dim\.?|taille|format)\s*:?\s*$/i,'');
+ return s.trim().slice(0,80);
+}
+// extrait {w,h,rest,unit} d'une ligne ; order = 'wh' | 'hw'
+function impDims(line,order){
+ const lw=line.match(IMP_LW),lh=line.match(IMP_LH);
+ if(lw&&lh){
+  const w=impToCm(impNum(lw[2]),lw[3]||lh[3]),h=impToCm(impNum(lh[2]),lh[3]||lw[3]);
+  let rest=line.replace(lw[0].slice(lw[1].length),' ').replace(lh[0].slice(lh[1].length),' ');
+  return {w,h,rest,unit:(lw[3]||lh[3]||'').toLowerCase(),labelled:true};
+ }
+ const m=line.match(IMP_PAIR);
+ if(m){
+  let a=impNum(m[2]),b=impNum(m[4]);const u1=m[3],u2=m[5];const unit=(u1||u2||'').toLowerCase();
+  a=impToCm(a,u1||u2);b=impToCm(b,u2||u1);
+  if(order==='hw'){const t=a;a=b;b=t}
+  const rest=line.slice(0,m.index+m[1].length)+' '+line.slice(m.index+m[0].length);
+  return {w:a,h:b,rest,unit,labelled:false};
+ }
+ return null;
+}
+function impSingle(line){ // une seule cote étiquetée (largeur OU hauteur/longueur)
+ const lw=line.match(IMP_LW),lh=line.match(IMP_LH);
+ if(lw&&!lh)return {k:'w',v:impToCm(impNum(lw[2]),lw[3]),unit:(lw[3]||'').toLowerCase(),rest:line.replace(lw[0].slice(lw[1].length),' ')};
+ if(lh&&!lw)return {k:'h',v:impToCm(impNum(lh[2]),lh[3]),unit:(lh[3]||'').toLowerCase(),rest:line.replace(lh[0].slice(lh[1].length),' ')};
+ const long=line.match(new RegExp('(^|[^A-Za-zÀ-ÿ])longueur'+IMP_FILL+'\\s*('+IMP_NUM+')\\s*('+IMP_UNIT+')?','i'));
+ if(long)return {k:'w',v:impToCm(impNum(long[2]),long[3]),unit:(long[3]||'').toLowerCase(),rest:line.replace(long[0].slice(long[1].length),' ')};
+ return null;
+}
+const IMP_COLS={name:/titre|nom|œuvre|oeuvre|désignation|designation|title|intitulé|intitule/i,dim:/dimension|dim\.|\bdim\b|taille|format|size/i,w:/^\s*(?:larg(?:eur)?\.?|width|l)\s*(?:\(.*\))?\s*$/i,h:/^\s*(?:haut(?:eur)?\.?|height|h)\s*(?:\(.*\))?\s*$/i};
+function impCells(line){return line.split(/\s*\|\s*|\t|\s{3,}/).map(c=>c.trim()).filter((c,i,a)=>c!==''||i<a.length-1)}
+function impHeader(line){
+ const cells=impCells(line);if(cells.length<2)return null;
+ const col={n:cells.length};cells.forEach((c,i)=>{if(col.name===undefined&&IMP_COLS.name.test(c)&&!IMP_COLS.dim.test(c))col.name=i;else if(col.dim===undefined&&IMP_COLS.dim.test(c))col.dim=i;else if(col.w===undefined&&IMP_COLS.w.test(c))col.w=i;else if(col.h===undefined&&IMP_COLS.h.test(c))col.h=i});
+ const hits=['name','dim','w','h'].filter(k=>col[k]!==undefined).length;
+ if(hits<2||(col.dim===undefined&&(col.w===undefined||col.h===undefined)))return null;
+ return col;
+}
+function impOk(v,max){return Number.isFinite(v)&&v>0&&v<=max}
+function parseImportText(text,order){
+ order=order==='hw'?'hw':'wh';
+ const lines=impClean(text).split('\n').map(s=>s.replace(/[ ]+$/,'')).filter(s=>s.trim()!=='');
+ const walls=[],works=[];let header=null,lastName='',wallPart=null,wallCtx='',pending=null;
+ const pushWall=(label,w,h,unit)=>{if(unit===''&&w<30&&h<30){w*=100;h*=100}let lb=impName(label);if(!lb||/(largeur|hauteur|longueur|dimension|taille|surface|width|height)/i.test(lb)||/^(?:du |de la )?(mur|murs|cimaise|paroi|cloison|wall)$/i.test(lb))lb='Mur '+(walls.length+1);if(impOk(w,5000)&&impOk(h,2000)&&w>=20&&h>=20)walls.push({label:lb,w:Math.round(w*10)/10,h:Math.round(h*10)/10});wallCtx=''};
+ const pushWork=(name,w,h)=>{if(impOk(w,800)&&impOk(h,800))works.push({name:impName(name),w:Math.round(w*100)/100,h:Math.round(h*100)/100})};
+ for(const raw of lines){
+  const line=raw.trim();
+  const hd=impHeader(raw);
+  if(hd){header=hd;lastName='';pending=null;continue}
+  // --- murs
+  const wm=IMP_WALL.exec(line);
+  const dimsAll=impDims(line,'wh');
+  if(wm){
+   const prefix=line.slice(0,wm.index+wm[0].length+14);
+   const startsWall=/^[\s\W\d]*(mur|murs|cimaise|cimaises|paroi|cloison|wall)\b/i.test(line)||/(dimensions?|taille|hauteur|largeur|longueur|surface)\s+(?:du|de la|d['’]un|of the)\s+(mur|cimaise|paroi|cloison|wall)/i.test(line);
+   if(startsWall){
+    if(dimsAll){pushWall(dimsAll.rest.replace(/[:\-–]/g,' '),dimsAll.w,dimsAll.h,dimsAll.unit);wallPart=null;continue}
+    const sg=impSingle(line);
+    if(sg){if(!wallPart)wallPart={label:wallCtx||line.replace(/(?:largeur|longueur|hauteur|larg\.?|haut\.?)\b.*$/i,'')};wallPart[sg.k]=sg.v;wallPart.unit=sg.unit||wallPart.unit||'';
+     if(wallPart.w&&wallPart.h){pushWall(wallPart.label,wallPart.w,wallPart.h,wallPart.unit);wallPart=null}
+     continue}
+    wallCtx=line;wallPart=null;continue;
+   }
+  }
+  if(wallPart||wallCtx){const sg=impSingle(line);if(sg&&!dimsAll){if(!wallPart)wallPart={label:wallCtx};wallPart[sg.k]=sg.v;wallPart.unit=sg.unit||wallPart.unit||'';if(wallPart.w&&wallPart.h){pushWall(wallPart.label,wallPart.w,wallPart.h,wallPart.unit);wallPart=null}continue}}
+  // --- tableau avec en-tête
+  if(header){
+   const cells=impCells(raw);
+   if(cells.length===header.n||cells.length===header.n-1&&header.name===0){
+    let w=NaN,h=NaN,name=header.name!==undefined?(cells[header.name]||''):'';
+    if(header.dim!==undefined&&cells[header.dim]!==undefined){const d=impDims(cells[header.dim],order);if(d){w=d.w;h=d.h}}
+    else if(header.w!==undefined&&header.h!==undefined){const mw=String(cells[header.w]||'').match(new RegExp('('+IMP_NUM+')\\s*('+IMP_UNIT+')?','i')),mh=String(cells[header.h]||'').match(new RegExp('('+IMP_NUM+')\\s*('+IMP_UNIT+')?','i'));if(mw&&mh){w=impToCm(impNum(mw[1]),mw[2]||mh[2]);h=impToCm(impNum(mh[1]),mh[2]||mw[2])}}
+    if(impOk(w,800)&&impOk(h,800)){pushWork(name,w,h);continue}
+   }
+  }
+  // --- cotes étiquetées sur lignes séparées (« Largeur : 65 » puis « Hauteur : 95 »)
+  const single=impSingle(line);
+  if(single&&!dimsAll){
+   if(!pending)pending={name:lastName};
+   pending[single.k]=single.v;
+   if(impOk(pending.w,800)&&impOk(pending.h,800)){pushWork(pending.name,pending.w,pending.h);pending=null;lastName=''}
+   continue;
+  }
+  // --- ligne avec dimensions
+  const d=impDims(line,order);
+  if(d){
+   if(impOk(d.w,800)&&impOk(d.h,800)){
+    let name=impName(d.rest);
+    if(!name&&lastName)name=lastName;
+    pushWork(name,d.w,d.h);lastName='';pending=null;wallCtx='';wallPart=null;
+   }
+   continue;
+  }
+  // --- ligne de texte seule : peut être le nom de l'œuvre suivante
+  const nm=impName(line);
+  if(nm&&nm.length<=60&&!/^(page|pdf|www|http|tél|tel|email|mail)/i.test(nm)){lastName=nm;pending=null}
+ }
+ return {walls,works};
+}
+
+// ---- Import : lecture PDF (pdf.js chargé à la demande, mis en cache hors ligne)
+let impPdfLib=null;
+async function impLoadPdfjs(){
+ if(impPdfLib)return impPdfLib;
+ const lib=await import('./pdf.min.js');
+ lib.GlobalWorkerOptions.workerSrc=new URL('./pdf.worker.min.js',location.href).href;
+ impPdfLib=lib;return lib;
+}
+function impLinesFromItems(items){
+ const rows=[];
+ for(const it of items){
+  if(!it||typeof it.str!=='string'||it.str.trim()==='')continue;
+  const x=it.transform[4],y=it.transform[5],h=Math.abs(it.transform[3])||Math.abs(it.height)||10;
+  let row=null;for(const r of rows){if(Math.abs(r.y-y)<=Math.max(2,Math.min(r.h,h)*.45)){row=r;break}}
+  if(!row){row={y,h,items:[]};rows.push(row)}
+  row.items.push({x,w:it.width||0,s:it.str});
+ }
+ rows.sort((a,b)=>b.y-a.y);
+ return rows.map(r=>{r.items.sort((a,b)=>a.x-b.x);let s='',end=null;
+  for(const it of r.items){if(end!==null){const gap=it.x-end;if(gap>r.h*1.6)s+=' | ';else if(gap>r.h*.12&&!/\s$/.test(s)&&!/^\s/.test(it.s))s+=' '}s+=it.s;end=it.x+it.w}
+  return s.trim()}).filter(Boolean);
+}
+async function impReadPdf(file){
+ const lib=await impLoadPdfjs();
+ const data=new Uint8Array(await file.arrayBuffer());
+ const doc=await lib.getDocument({data,isEvalSupported:false,useSystemFonts:false,disableFontFace:true,verbosity:0}).promise;
+ const pages=Math.min(doc.numPages,40),out=[];
+ for(let n=1;n<=pages;n++){const page=await doc.getPage(n);const tc=await page.getTextContent();out.push(...impLinesFromItems(tc.items));page.cleanup&&page.cleanup()}
+ try{await doc.destroy()}catch(e){}
+ return {text:out.join('\n'),pages:doc.numPages,read:pages};
+}
+// ---- Import : fenêtre
+const impEsc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let impParsed={walls:[],works:[]};
+function impIsEmptyWork(w){return String(w.name||'').trim()===''&&['w','h','top','left','right','bottom'].every(k=>w[k]===''||w[k]===undefined)}
+function impOpen(){
+ if(planLocked){alert('Le plan est verrouillé. Déverrouille-le (onglet Plan › Disposition) pour importer.');return}
+ $('impMode').value=works.every(impIsEmptyWork)?'replace':'append';
+ $('impText').value='';$('impStatus').textContent='';$('impTextBox').open=true;impParse();
+ $('importSheet').classList.remove('hide');document.body.classList.add('imp-open');
+}
+function impClose(){$('importSheet').classList.add('hide');document.body.classList.remove('imp-open')}
+function impSummary(){
+ const n=[...document.querySelectorAll('#impWorks .imp-item')].filter(r=>r.querySelector('.imp-inc').checked&&Number(r.querySelector('.imp-w').value)>0&&Number(r.querySelector('.imp-h').value)>0).length;
+ const sel=$('impWallSel'),wall=sel&&sel.value!=='';
+ const go=$('impGo');
+ go.textContent=n&&wall?'Importer le mur et '+n+' œuvre'+(n>1?'s':''):n?'Importer '+n+' œuvre'+(n>1?'s':''):wall?'Importer le mur':'Importer';
+ go.disabled=!n&&!wall;
+}
+function impParse(){
+ const text=$('impText').value,r=parseImportText(text,$('impOrder').value);impParsed=r;
+ const wb=$('impWalls');wb.replaceChildren();
+ if(r.walls.length){
+  const lab=document.createElement('label');lab.setAttribute('for','impWallSel');lab.textContent=r.walls.length>1?'Murs trouvés — choisis celui à utiliser':'Mur trouvé';
+  const sel=document.createElement('select');sel.id='impWallSel';
+  const none=document.createElement('option');none.value='';none.textContent='Ne pas changer le mur';sel.append(none);
+  r.walls.forEach((w,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=w.label+' — '+f(w.w)+' × '+f(w.h)+' cm';sel.append(o)});
+  sel.value='0';sel.onchange=impSummary;wb.append(lab,sel);
+ }
+ const wk=$('impWorks');wk.replaceChildren();
+ if(r.works.length){
+  const h=document.createElement('div');h.className='imp-sub';h.textContent=r.works.length+' œuvre'+(r.works.length>1?'s':'')+' trouvée'+(r.works.length>1?'s':'')+' · largeur × hauteur en cm';wk.append(h);
+  r.works.forEach((o,i)=>{
+   const row=document.createElement('div');row.className='imp-item';
+   row.innerHTML='<label class="imp-chk"><input type="checkbox" class="imp-inc" checked aria-label="Importer cette œuvre"></label><input class="imp-n" type="text" maxlength="80" placeholder="Œuvre '+(i+1)+'" aria-label="Nom"><input class="imp-w" type="number" min="0" step="0.1" inputmode="decimal" aria-label="Largeur en cm" placeholder="Largeur"><input class="imp-h" type="number" min="0" step="0.1" inputmode="decimal" aria-label="Hauteur en cm" placeholder="Hauteur">';
+   row.querySelector('.imp-n').value=o.name;row.querySelector('.imp-w').value=String(o.w);row.querySelector('.imp-h').value=String(o.h);
+   row.addEventListener('input',impSummary);row.addEventListener('change',impSummary);
+   wk.append(row);
+  });
+ }else if(text.trim()&&!r.walls.length){
+  const p=document.createElement('p');p.className='muted';p.textContent='Aucune œuvre reconnue. Écris une œuvre par ligne avec ses dimensions, par exemple : Soleil levant — 65 x 95 cm.';wk.append(p);
+ }
+ impSummary();
+}
+function impApply(){
+ const rows=[...document.querySelectorAll('#impWorks .imp-item')].filter(r=>r.querySelector('.imp-inc').checked).map(r=>({name:r.querySelector('.imp-n').value.trim(),w:Number(r.querySelector('.imp-w').value),h:Number(r.querySelector('.imp-h').value)})).filter(o=>o.w>0&&o.h>0);
+ const sel=$('impWallSel'),wall=sel&&sel.value!==''?impParsed.walls[Number(sel.value)]:null;
+ if(!rows.length&&!wall)return;
+ if(wall){$('mw').value=String(wall.w);$('mh').value=String(wall.h);$('mw').dispatchEvent(new Event('input',{bubbles:true}));$('mh').dispatchEvent(new Event('input',{bubbles:true}))}
+ let skipped=0;
+ if(rows.length){
+  const replace=$('impMode').value==='replace';
+  if(replace){works=[];freePositions.clear();selectedDims.clear();selectedPoints.clear()}
+  else{const gone=works.filter(impIsEmptyWork);works=works.filter(w=>!impIsEmptyWork(w));gone.forEach(w=>{selectedDims.delete(w.id);selectedPoints.delete(w.id);freePositions.delete(w.id)})}
+  const room=Math.max(0,100-works.length);skipped=Math.max(0,rows.length-room);
+  const wasAll=works.every(w=>selectedDims.has(w.id));
+  for(const o of rows.slice(0,room)){const a={id:nextId++,name:o.name,w:String(o.w),h:String(o.h),points:'2',top:'',left:'',right:'',bottom:'',symmetric:true,showPhoto:false};works.push(a);if(replace||wasAll)selectedDims.add(a.id)}
+  if(!works.length)works.push({id:nextId++,name:'',w:'',h:'',points:'2',top:'',left:'',right:'',bottom:'',symmetric:true,showPhoto:false});
+  renderWorks();
+ }
+ refresh();
+ impClose();
+ if(skipped)alert('Limite de 100 œuvres atteinte : '+skipped+' œuvre(s) n’ont pas été importées.');
+ const tab=document.querySelector('#appTabs [data-view="'+(rows.length?'oeuvres':'mur')+'"]');if(tab)tab.click();
+}
+async function impChooseFile(file){
+ const status=$('impStatus');status.classList.remove('imp-err');
+ if(!file)return;
+ try{
+  let text='';
+  if(/\.pdf$/i.test(file.name)||file.type==='application/pdf'){
+   if(file.size>40*1024*1024)throw new Error('Ce PDF est trop volumineux (40 Mo maximum).');
+   status.textContent='Lecture du PDF…';
+   let res;
+   try{res=await impReadPdf(file)}
+   catch(e){
+    if(e&&e.name==='PasswordException')throw new Error('Ce PDF est protégé par un mot de passe.');
+    if(!impPdfLib)throw new Error('Lecture PDF indisponible : les fichiers pdf.min.js et pdf.worker.min.js doivent être dans le même dossier que index.html (puis recharge l’appli une fois en ligne).');
+    throw new Error('Impossible de lire ce PDF ('+String(e&&e.message||e).slice(0,80)+').');
+   }
+   text=res.text;
+   if(text.replace(/\s+/g,'').length<3)throw new Error('Ce PDF ne contient que des images (scan ou photo) : aucun texte à lire. Recopie les mesures dans la zone ci-dessous.');
+   status.textContent='✓ PDF lu : '+res.read+' page'+(res.read>1?'s':'')+(res.pages>res.read?' sur '+res.pages:'')+'. Vérifie ci-dessous ce qui a été reconnu.';
+  }else{
+   if(file.size>2*1024*1024)throw new Error('Fichier trop volumineux.');
+   text=await file.text();status.textContent='✓ Fichier lu. Vérifie ci-dessous ce qui a été reconnu.';
+  }
+  $('impText').value=text;impParse();if(impParsed.works.length||impParsed.walls.length)$('impTextBox').open=false;
+  if(!impParsed.works.length&&!impParsed.walls.length)status.textContent='Texte lu, mais aucune œuvre ni aucun mur reconnu. Corrige le texte ci-dessous : une œuvre par ligne, avec ses dimensions (ex. « Aube — 65 x 95 cm »).';
+ }catch(e){status.textContent=e.message;status.classList.add('imp-err')}
+}
+$('impOpen').onclick=impOpen;$('impOpenMur').onclick=impOpen;
+$('impClose').onclick=impClose;$('impCancel').onclick=impClose;$('impGo').onclick=impApply;
+$('impPdfBtn').onclick=()=>$('impPdfFile').click();
+$('impPdfFile').onchange=e=>{const file=e.target.files&&e.target.files[0];e.target.value='';impChooseFile(file)};
+let impTimer=null;$('impText').addEventListener('input',()=>{clearTimeout(impTimer);impTimer=setTimeout(impParse,250)});
+$('impOrder').addEventListener('change',impParse);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('importSheet').classList.contains('hide'))impClose()});
+
+
 $('addWork').onclick=()=>{const showNew=works.every(w=>selectedDims.has(w.id));const added={id:nextId++,name:'',w:'',h:'',points:'2',top:'',left:'',right:'',bottom:''};works.push(added);if(showNew)selectedDims.add(added.id);renderWorks();refresh()};$('makeSeries').onclick=()=>{series=!series;$('seriesOptions').classList.toggle('hide',!series);$('makeSeries').classList.toggle('primary',series);refresh()};for(const id of ['mw','mh','cols','gx','gy','ref','anchor','gapAnchor','level','shift','distribution','dims'])$(id).addEventListener('input',refresh);$('dims').addEventListener('change',()=>{setDimPanel();draw()});$('dimAll').onclick=()=>{works.forEach(w=>selectedDims.add(w.id));refreshDimChoices();draw()};$('dimNone').onclick=()=>{selectedDims.clear();refreshDimChoices();draw()};$('pointsAll').onclick=()=>{works.forEach(w=>selectedPoints.delete(w.id));refreshPointChoices();draw()};$('pointsNone').onclick=()=>{works.forEach(w=>selectedPoints.set(w.id,new Set()));refreshPointChoices();draw()};for(const id of ['dimHeight','dimEdge','dimGap','dimWorkGap'])$(id).addEventListener('change',draw);
 $('download').onclick=()=>{const svg=$('drawing').cloneNode(true);svg.setAttribute('xmlns',ns);const url=URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(svg)],{type:'image/svg+xml'}));const a=document.createElement('a');a.href=url;a.download='ridfou-plan.svg';a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)};
 function showPhoto(){window.__projectScheduleSave?.();const img=$('photo');img.style.display=photoUrl?'block':'none';$('photoTools').classList.toggle('hide',!photoUrl);img.style.opacity=String(val('opacity')/100);img.style.transform=`rotate(${angle}deg)`}
