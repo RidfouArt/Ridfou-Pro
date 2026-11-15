@@ -1,46 +1,25 @@
-// Ridfou Expo — service worker.
-// Rôle : faire fonctionner l'application hors ligne (sur un chantier, sans réseau), et récupérer
-// la nouvelle version de index.html dès qu'on est en ligne.
-// Quand tu publies une nouvelle version de l'application, incrémente simplement CACHE ci-dessous.
-const CACHE = 'ridfou-expo-v3';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './apple-touch-icon.png', './icon-192.png', './icon-512.png'];
-
-self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));
+/* PWA offline cache — scoped to the same GitHub Pages repository. */
+const CACHE='ridfou-accroche-v8-20261114';
+const APP=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-180.png'];
+self.addEventListener('install',event=>{
+ event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(APP)).then(()=>self.skipWaiting()));
 });
-
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys()
-      .then(keys => Promise.all(keys.filter(k => k.startsWith('ridfou-expo-') && k !== CACHE).map(k => caches.delete(k))))
-      .then(() => self.clients.claim())
-  );
+self.addEventListener('activate',event=>{
+ event.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(key=>key.startsWith('ridfou-accroche-')&&key!==CACHE).map(key=>caches.delete(key)))),self.clients.claim()]));
 });
-
-self.addEventListener('fetch', event => {
-  const request = event.request;
-  if (request.method !== 'GET') return;
-  const url = new URL(request.url);
-  if (url.origin !== location.origin) return;
-
-  // Page : réseau d'abord (version à jour), copie en cache pour le hors-ligne.
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      fetch(request)
-        .then(response => {
-          if (response.ok) { const copy = response.clone(); caches.open(CACHE).then(c => c.put('./index.html', copy)); }
-          return response;
-        })
-        .catch(() => caches.match('./index.html').then(hit => hit || caches.match('./')))
-    );
-    return;
-  }
-
-  // Autres fichiers (icônes, manifeste) : cache d'abord, puis réseau.
-  event.respondWith(
-    caches.match(request).then(hit => hit || fetch(request).then(response => {
-      if (response.ok) { const copy = response.clone(); caches.open(CACHE).then(c => c.put(request, copy)); }
-      return response;
-    }))
-  );
+self.addEventListener('message',event=>{
+ if(event.data?.type==='CACHE_APP')event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(APP)).catch(()=>{}));
+});
+self.addEventListener('fetch',event=>{
+ const req=event.request;
+ if(req.method!=='GET'||new URL(req.url).origin!==self.location.origin)return;
+ if(req.mode==='navigate'){
+  event.respondWith(fetch(req).then(resp=>{if(resp.ok){const copy=resp.clone();caches.open(CACHE).then(cache=>cache.put(req,copy)).catch(()=>{});}return resp}).catch(async()=>{
+   const cache=await caches.open(CACHE);
+   return await cache.match(req,{ignoreSearch:true})||await cache.match('./index.html')||Response.error();
+  }));return;
+ }
+ event.respondWith(caches.match(req,{ignoreSearch:true}).then(cached=>cached||fetch(req).then(resp=>{
+  if(resp.ok){const copy=resp.clone();caches.open(CACHE).then(cache=>cache.put(req,copy)).catch(()=>{});}return resp;
+ })));
 });
