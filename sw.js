@@ -1,5 +1,5 @@
 /* PWA offline cache — scoped to the same GitHub Pages repository. */
-const CACHE='ridfou-accroche-v12-20261116';
+const CACHE='ridfou-accroche-v13-20261116';
 const APP=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-180.png'];
 self.addEventListener('install',event=>{
  event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(APP)).then(()=>self.skipWaiting()));
