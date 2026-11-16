@@ -1,5 +1,5 @@
 /* PWA offline cache — scoped to the same GitHub Pages repository. */
-const CACHE='ridfou-accroche-v9-20261115';
+const CACHE='ridfou-accroche-v10-20261116';
 const APP=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./icon-180.png'];
 /* Lecteur PDF : mis en cache à part, sans bloquer l'installation de l'appli. */
 const OPT=['./pdf.min.js','./pdf.worker.min.js'];
